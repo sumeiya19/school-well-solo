@@ -50,7 +50,7 @@ VALUES
 
 --- SELECT STATEMENT
 
-SELECT "user_id", "first_name", "last_name", "grade", "illness"."name", "illness_input"."symptoms"
+SELECT "user_id", "first_name", "last_name", "grade", "illness_date", "illness"."name", "illness_input"."symptoms"
 FROM "user"
 JOIN "student" ON "user_id" = "user"."id"
 JOIN "illness_input" ON "student_id" = "student"."id"
