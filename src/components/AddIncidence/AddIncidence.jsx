@@ -53,7 +53,7 @@ function AddIncidence() {
             <p>Incidence available here</p>
 
             <ul>
-                {Array.isArray(incidenceList) && incidenceList.map((list) => (
+                {incidenceList.map((list) => (
                     <li key={list.id}>{list.last_name} {list.first_name} {list.grade}</li>
                 ))}
             </ul>

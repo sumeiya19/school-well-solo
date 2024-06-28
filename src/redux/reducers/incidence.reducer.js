@@ -1,11 +1,11 @@
-const initialState = [];
 
-const incidenceReducer = (state = initialState, action) => {
+
+const incidenceReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_INCIDENCE':
             return action.payload;
         case 'ADD_INCIDENCE_SUCCESS':
-            return state; // You might want to return a new state if needed
+            return state; 
         default:
             return state;
     }
