@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -6,6 +6,10 @@ function AddIncidence() {
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
     const [grade, setGrade] = useState('');
+
+    // useEffect(()=> {
+    //     dispatch({type: "SET_INCIDENCE"})
+    //   }, []);
 
     const incidenceList = useSelector((store) => store.incidenceReducer);
 
@@ -23,6 +27,13 @@ function AddIncidence() {
         setGrade('');
     };
 
+    // const handleDelete = () => {
+    //     console.log("Delete Clicked");
+    //     dispatch({ type: '', payload: })
+    //     return;
+      
+    //   }
+
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -30,21 +41,21 @@ function AddIncidence() {
                     type="text"
                     placeholder="Last Name"
                     value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    onChange={(event) => setLastName(event.target.value)}
                 />
 
                 <input
                     type="text"
                     placeholder="First Name"
                     value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    onChange={(event) => setFirstName(event.target.value)}
                 />
 
                 <input
                     type="number"
                     placeholder="Grade"
                     value={grade}
-                    onChange={(e) => setGrade(e.target.value)}
+                    onChange={(event) => setGrade(event.target.value)}
                 />
 
                 <button type="submit">Add Incidence</button>
@@ -54,7 +65,11 @@ function AddIncidence() {
 
             <ul>
                 {incidenceList.map((list) => (
-                    <li key={list.id}>{list.last_name} {list.first_name} {list.grade}</li>
+                    <li key={list.id}>{list.last_name} {list.first_name} {list.grade}
+                     <button>Delete</button>
+                    </li>
+                    
+
                 ))}
             </ul>
         </>

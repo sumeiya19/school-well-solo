@@ -22,6 +22,15 @@ function* fetchIncidence() {
     }
 }
 
+// function* deleteShelfItem(action) {
+//     try {
+//         yield axios.delete(`/api/incidence/${action.payload}`);
+//         yield put({ type: ''});
+//     } catch (error) {
+//         console.error('Error with shelf DELETE request', error);
+//     }
+// }
+
 export default function* rootSaga() {
     yield takeLatest('ADD_INCIDENCE', addIncidence);
     yield takeLatest('FETCH_INCIDENCE', fetchIncidence);
