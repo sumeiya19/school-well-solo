@@ -4,12 +4,11 @@ import axios from 'axios';
 function* addIncidence(action) {
     try {
         yield call(axios.post, '/api/incidence', action.payload);
-        yield put({ type: 'ADD_INCIDENCE_SUCCESS' });
+        yield put({ type: 'ADD_INCIDENCE_SUCESS' });
         // Optionally, fetch updated incidence list
         yield put({ type: 'FETCH_INCIDENCE' });
     } catch (error) {
         console.error('Error with incidence POST request', error);
-        yield put({ type: 'ADD_INCIDENCE_FAILURE', error });
     }
 }
 
