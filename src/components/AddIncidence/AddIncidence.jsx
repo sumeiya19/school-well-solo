@@ -94,23 +94,41 @@ function AddIncidence() {
 
             <p>Incidence available here</p>
 
-            <ul>
-                {incidenceList.length > 0 ? (
-                    incidenceList.map((item) => (
-                        <li key={item.id}>
-                            Last Name: {item.last_name}<br />
-                            First Name: {item.first_name}<br />
-                            Grade: {item.grade}<br />
-                            Illness: {item.illness}<br />
-                            Symptoms: {item.symptoms}<br />
-                            {new Date(item.illness_date).toLocaleDateString()}<br />
-                            <button>Delete</button>
-                        </li>
-                    ))
-                ) : (
-                    <li>No incidences to display</li>
-                )}
-            </ul>
+            <table>
+  <thead>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Grade</th>
+      <th>Illness</th>
+      <th>Symptoms</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {incidenceList.length > 0 ? (
+      incidenceList.map((item) => (
+        <tr key={item.id}>
+          <td>{item.last_name}</td>
+          <td>{item.first_name}</td>
+          <td>{item.grade}</td>
+          <td>{item.illness}</td>
+          <td>{item.symptoms}</td>
+          <td>{new Date(item.illness_date).toLocaleDateString()}</td>
+          <td>
+            <button>Delete</button>
+          </td>
+        </tr>
+      ))
+    ) : (
+      <tr>
+        <td colSpan="7">No incidences to display</td>
+      </tr>
+    )}
+  </tbody>
+</table>
+
         </>
     );
 }
