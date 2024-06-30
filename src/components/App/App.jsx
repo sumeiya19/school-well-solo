@@ -19,6 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import HomePage from '../HomePage/HomePage';
+import AddIncidence from '../AddIncidence/AddIncidence';
 
 import './App.css';
 
@@ -66,6 +68,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/home">
+            <HomePage/>
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/addnewincidence">
+            <AddIncidence />
           </ProtectedRoute>
 
           <Route
