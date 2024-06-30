@@ -10,14 +10,14 @@ function AddIncidence() {
     const [symptoms, setSymptoms] = useState('');
     const [illnessDate, setIllnessDate] = useState('');
 
-    useEffect(() => {
-        dispatch({ type: "FETCH_INCIDENCE" });
-    }, []);
-
+    const dispatch = useDispatch();
+    const history = useHistory();
     const incidenceList = useSelector((store) => store.incidenceReducer);
     console.log('incidenceList:', incidenceList);
 
-    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch({ type: "FETCH_INCIDENCE" });
+    }, [dispatch]);
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
@@ -33,9 +33,8 @@ function AddIncidence() {
                 symptoms,
                 illness_date: illnessDate
             }
-            
         });
-console.log('Illnessdate:', illnessDate);
+
         // Clear input fields
         setLastName('');
         setFirstName('');
@@ -96,24 +95,22 @@ console.log('Illnessdate:', illnessDate);
             <p>Incidence available here</p>
 
             <ul>
-  {incidenceList.length > 0 ? (
-    incidenceList.map((item) => (
-      <li key={item.id}>
-        Last Name: {item.last_name}<br />
-        First Name: {item.first_name}<br />
-        Grade: {item.grade}<br />
-        Illness: {item.name}<br />
-        Symptoms: {item.symptoms}<br />
-        Date: {item.illness_date}<br />
-        <button>Delete</button>
-      </li>
-    ))
-  ) : (
-    <li>No incidences to display</li>
-  )}
-</ul>
-
-
+                {incidenceList.length > 0 ? (
+                    incidenceList.map((item) => (
+                        <li key={item.id}>
+                            Last Name: {item.last_name}<br />
+                            First Name: {item.first_name}<br />
+                            Grade: {item.grade}<br />
+                            Illness: {item.illness}<br />
+                            Symptoms: {item.symptoms}<br />
+                            {new Date(item.illness_date).toLocaleDateString()}<br />
+                            <button>Delete</button>
+                        </li>
+                    ))
+                ) : (
+                    <li>No incidences to display</li>
+                )}
+            </ul>
         </>
     );
 }

@@ -4,9 +4,7 @@ import axios from 'axios';
 function* addIncidence(action) {
     try {
         yield call(axios.post, '/api/incidence', action.payload);
-        yield put({ type: 'ADD_INCIDENCE_SUCESS' });
-        // Optionally, fetch updated incidence list
-        yield put({ type: 'FETCH_INCIDENCE' });
+        yield put({ type: 'FETCH_INCIDENCE' }); // Fetch updated incidence list
     } catch (error) {
         console.error('Error with incidence POST request', error);
     }
@@ -17,8 +15,13 @@ function* fetchIncidence() {
         const response = yield call(axios.get, '/api/incidence');
         yield put({ type: 'SET_INCIDENCE', payload: response.data });
     } catch (error) {
-        console.error('Error with incidence GET request', error);
+        console.error('Error fetching incidence:', error);
     }
+}
+
+export default function* rootSaga() {
+    yield takeLatest('ADD_INCIDENCE', addIncidence);
+    yield takeLatest('FETCH_INCIDENCE', fetchIncidence);
 }
 
 // function* deleteShelfItem(action) {
@@ -29,8 +32,3 @@ function* fetchIncidence() {
 //         console.error('Error with shelf DELETE request', error);
 //     }
 // }
-
-export default function* rootSaga() {
-    yield takeLatest('ADD_INCIDENCE', addIncidence);
-    yield takeLatest('FETCH_INCIDENCE', fetchIncidence);
-}
