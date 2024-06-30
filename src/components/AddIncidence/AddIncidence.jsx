@@ -44,6 +44,11 @@ function AddIncidence() {
         setIllnessDate('');
     };
 
+    const handleDelete = (id) => {
+        console.log("Deleting item with ID:", id);
+        dispatch({ type: 'DELETE_ITEM', payload: id });
+    };
+
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -95,44 +100,45 @@ function AddIncidence() {
             <p>Incidence available here</p>
 
             <table>
-  <thead>
-    <tr>
-      <th>Last Name</th>
-      <th>First Name</th>
-      <th>Grade</th>
-      <th>Illness</th>
-      <th>Symptoms</th>
-      <th>Date</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {incidenceList.length > 0 ? (
-      incidenceList.map((item) => (
-        <tr key={item.id}>
-          <td>{item.last_name}</td>
-          <td>{item.first_name}</td>
-          <td>{item.grade}</td>
-          <td>{item.illness}</td>
-          <td>{item.symptoms}</td>
-          <td>{new Date(item.illness_date).toLocaleDateString()}</td>
-          <td>
-            <button>Delete</button>
-          </td>
-        </tr>
-      ))
-    ) : (
-      <tr>
-        <td colSpan="7">No incidences to display</td>
-      </tr>
-    )}
-  </tbody>
-</table>
+                <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Grade</th>
+                        <th>Illness</th>
+                        <th>Symptoms</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {incidenceList.length > 0 ? (
+                        incidenceList.map((item) => (
+                            <tr key={item.id}>
+                                <td>{item.last_name}</td>
+                                <td>{item.first_name}</td>
+                                <td>{item.grade}</td>
+                                <td>{item.illness}</td>
+                                <td>{item.symptoms}</td>
+                                <td>{new Date(item.illness_date).toLocaleDateString()}</td>
+                                <td>
+                                    <button onClick={() => handleDelete(item.id)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="7">No incidences to display</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
 
         </>
     );
 }
 
 export default AddIncidence;
+
 
 

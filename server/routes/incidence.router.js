@@ -92,15 +92,23 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    const incidenceId = req.params.id;
 
+    const deleteIncidenceQuery = `
+        DELETE FROM "illness_input"
+        WHERE id = $1
+    `;
 
-
-
-
-
-
-
-
-
+    pool.query(deleteIncidenceQuery, [incidenceId])
+        .then(() => {
+            console.log(`Deleted incidence with ID ${incidenceId}`);
+            res.sendStatus(200); // OK status
+        })
+        .catch((error) => {
+            console.error('Error deleting incidence:', error);
+            res.sendStatus(500); // Server error status
+        });
+});
 
 module.exports = router;
