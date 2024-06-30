@@ -96,7 +96,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const incidenceId = req.params.id;
 
     const deleteIncidenceQuery = `
-        DELETE FROM "illness_input"
+        DELETE FROM "illness"
         WHERE id = $1
     `;
 
