@@ -49,8 +49,14 @@ function AddIncidence() {
         dispatch({ type: 'DELETE_ITEM', payload: id });
     };
 
+    const handleNewStudent = () => {
+        history.push('/addnewstudent')
+    }
+
     return (
         <>
+        <button onClick={handleNewStudent}>New Student? Add here!</button>
+        
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"

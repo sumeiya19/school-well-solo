@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import HomePage from '../HomePage/HomePage';
 import AddIncidence from '../AddIncidence/AddIncidence';
+import AddNewStudent from '../AddNewStudent/AddNewStudent';
 
 import './App.css';
 
@@ -76,6 +77,10 @@ function App() {
 
           <ProtectedRoute exact path = "/addnewincidence">
             <AddIncidence />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/addnewstudent">
+            <AddNewStudent />
           </ProtectedRoute>
 
           <Route
