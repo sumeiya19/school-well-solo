@@ -9,11 +9,17 @@ function HomePage() {
    const history = useHistory(); 
 
    const handleNewIncidence = () => {
-    history.push('/addnewincidence')
+    history.push('/addincidenceform')
    }
+const handleCurrentIncidence = () => {
+  history.push('/addnewincidence')
+}
+
     return (<>
     <h3>Create New Incidence Record</h3>
-  <button onClick={handleNewIncidence}>Add New Incidence</button>
+  <button onClick={handleNewIncidence}>Add New Incidence</button> 
+  <br />
+  <button onClick={handleCurrentIncidence}>Current Incidence</button>
 
   </> )
 } 
