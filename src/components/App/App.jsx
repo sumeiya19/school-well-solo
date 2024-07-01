@@ -22,6 +22,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import HomePage from '../HomePage/HomePage';
 import AddIncidence from '../AddIncidence/AddIncidence';
 import AddNewStudent from '../AddNewStudent/AddNewStudent';
+// import AddIncidenceForm from '../AddIncideForm/AddIncidenceForm';
+import Results from '../Results/Results';
 
 import './App.css';
 
@@ -74,6 +76,14 @@ function App() {
           <ProtectedRoute exact path = "/home">
             <HomePage/>
           </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/results">
+            <Results />
+          </ProtectedRoute>
+
+          {/* <ProtectedRoute exact path = "/addincidenceform">
+            <AddIncidenceForm />
+          </ProtectedRoute> */}
 
           <ProtectedRoute exact path = "/addnewincidence">
             <AddIncidence />

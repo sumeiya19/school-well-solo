@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function AddIncidence() {
+function AddIncidenceForm() {
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
     const [grade, setGrade] = useState('');
@@ -12,12 +12,6 @@ function AddIncidence() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const incidenceList = useSelector((store) => store.incidenceReducer);
-    console.log('incidenceList:', incidenceList);
-
-    useEffect(() => {
-        dispatch({ type: "FETCH_INCIDENCE" });
-    }, [dispatch]);
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
@@ -42,25 +36,13 @@ function AddIncidence() {
         setName('');
         setSymptoms('');
         setIllnessDate('');
+
+        // Navigate back to the list page
+        // history.push('/');
     };
-
-    const handleDelete = (id) => {
-        console.log("Deleting item with ID:", id);
-        dispatch({ type: 'DELETE_ITEM', payload: id });
-    };
-
-    const handleNewStudent = () => {
-        history.push('/addnewstudent')
-    }
-
-    const handleResult = () => {
-        history.push('/results')
-    }
 
     return (
         <>
-        <button onClick={handleNewStudent}>New Student? Add here!</button>
-        
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -107,49 +89,9 @@ function AddIncidence() {
                 <button type="submit">Add Incidence</button>
             </form>
 
-            <p>Incidence available here</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Grade</th>
-                        <th>Illness</th>
-                        <th>Symptoms</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {incidenceList.length > 0 ? (
-                        incidenceList.map((item) => (
-                            <tr key={item.id}>
-                                <td>{item.last_name}</td>
-                                <td>{item.first_name}</td>
-                                <td>{item.grade}</td>
-                                <td>{item.illness}</td>
-                                <td>{item.symptoms}</td>
-                                <td>{new Date(item.illness_date).toLocaleDateString()}</td>
-                                <td>
-                                    <button onClick={() => handleDelete(item.id)}>Delete</button>
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="7">No incidences to display</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-            <button onClick={handleResult}>Submit</button>
-
+            
         </>
     );
 }
 
-export default AddIncidence;
-
-
-
+export default AddIncidenceForm;

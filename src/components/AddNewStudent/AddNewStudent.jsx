@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-
-function AddNewStudent () {
+function AddNewStudent() {
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
     const [grade, setGrade] = useState('');
@@ -15,30 +14,55 @@ function AddNewStudent () {
         dispatch({ type: "FETCH_STUDENT" });
     }, [dispatch]);
 
-    
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
 
-    return (<>
-        <h1>Add New Student</h1>
-    
+        // Dispatch action with payload
+        dispatch({
+            type: 'ADD_STUDENT',
+            payload: {
+                last_name: lastName,
+                first_name: firstName,
+                grade,
+            }
+        });
 
+        // Clear input fields
+        setLastName('');
+        setFirstName('');
+        setGrade('');
+    };
 
-<input 
-type='text'
-placeholder='Last Name'
-/>
+    return (
+        <>
+            <h1>Add New Student</h1>
 
-<input 
-type='text'
-placeholder='First Name'
-/>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    placeholder='Last Name'
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)}
+                />
 
-<input 
-type='number'
-placeholder='Grade'
-/> 
-<button>Add Student</button>
+                <input
+                    type='text'
+                    placeholder='First Name'
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
+                />
 
-{studentList && studentList.length > 0 ? (
+                <input
+                    type='number'
+                    placeholder='Grade'
+                    value={grade}
+                    onChange={(e) => setGrade(e.target.value)}
+                />
+                
+                <button type='submit'>Add Student</button>
+            </form>
+
+            {studentList && studentList.length > 0 ? (
                 <table>
                     <thead>
                         <tr>
@@ -60,8 +84,8 @@ placeholder='Grade'
             ) : (
                 <p>No students available</p>
             )}
-
-        </> )
+        </>
+    );
 }
 
-export default AddNewStudent
+export default AddNewStudent;

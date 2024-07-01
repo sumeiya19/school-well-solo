@@ -24,6 +24,7 @@ export default function* rootSaga() {
     yield takeLatest('FETCH_INCIDENCE', fetchIncidence);
     yield takeLatest('DELETE_ITEM', deleteIncidence)
     yield takeLatest('FETCH_STUDENT', fetchStudent)
+    yield takeLatest('ADD_STUDENT', addStudent)
 }
 
 function* deleteIncidence(action) {
