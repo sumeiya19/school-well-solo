@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function AddIncidenceForm() {
@@ -12,6 +12,7 @@ function AddIncidenceForm() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    const incidenceList = useSelector((store) => store.incidenceReducer);
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
@@ -38,7 +39,7 @@ function AddIncidenceForm() {
         setIllnessDate('');
 
         // Navigate back to the list page
-        // history.push('/');
+        history.push('/results');
     };
 
     return (
@@ -88,7 +89,7 @@ function AddIncidenceForm() {
 
                 <button type="submit">Add Incidence</button>
             </form>
-
+  
             
         </>
     );
