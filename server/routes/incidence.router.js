@@ -115,6 +115,10 @@ router.put('/:id', (req, res) => {
     const idToUpdate = req.params.id;
     const { last_name, first_name, grade, name, symptoms, illness_date } = req.body;
 
+    console.log('Last Name', last_name);
+    console.log('First', first_name);
+    console.log('Req.body', req.body);
+
     const updateStudentQuery = `
         UPDATE "student"
         SET "last_name" = $1, "first_name" = $2, "grade" = $3
@@ -148,7 +152,7 @@ router.put('/:id', (req, res) => {
             return pool.query(updateIllnessInputQuery, illnessInputValues);
         })
         .then(() => {
-            res.sendStatus(200); // Success response if all updates are successful
+            res.sendStatus(200); 
         })
         .catch((error) => {
             console.error('Error updating records:', error);

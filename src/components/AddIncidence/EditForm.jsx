@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddIncidence from './AddIncidence';
 
 function EditForm(props) {
     const dispatch = useDispatch();
@@ -11,10 +10,10 @@ function EditForm(props) {
 
     const editIncidence = useSelector((store) => store.editIncidence);
 
-    function handleChange(event) {
+    function handleChange(event, property) {
         dispatch({
             type: 'EDIT_ONCHANGE',
-            payload: { property: 'last_name', value: event.target.value }
+            payload: { property: property, value: event.target.value }
         });
     }
 
@@ -27,7 +26,7 @@ function EditForm(props) {
                 // clean up reducer data
                 dispatch({ type: 'EDIT_CLEAR' });
 
-                // refresh will happen with useEffect on Home
+                
                 history.push('/addnewincidence'); // back to list
             })
             .catch(error => {
@@ -35,50 +34,52 @@ function EditForm(props) {
             });
     }
 
-    // Add this check
+    
     // if (!editIncidence) {
     //     return <p>Loading...</p>;
     // }
-
+    console.log('Edit Incidence ID', editIncidence.id);
     return (
         <>
             <h2>Edit Student</h2>
-            {/* <p>About to edit: {editIncidence.last_name} with id: {editIncidence.id}</p> */}
+            <p>About to edit: {editIncidence.last_name} with id: {editIncidence.id}</p>
+
 
             <form onSubmit={handleSubmit}>
                 <input
                     name="last_name"
-                    onChange={handleChange}
+                    onChange={(event) => handleChange(event, 'last_name')}
                     placeholder='Last Name'
                     value={editIncidence.last_name}
                 />
                 <input
                     name="first_name"
-                    onChange={handleChange}
+                    onChange={(event) => handleChange (event, 'first_name')}
                     placeholder='First Name'
                     value={editIncidence.first_name}
                 />
                 <input
+                    type='number'
                     name="grade"
-                    onChange={handleChange}
+                    onChange={(event) => handleChange (event, 'grade')}
                     placeholder='Grade'
                     value={editIncidence.grade}
                 />
                 <input
                     name="illness"
-                    onChange={handleChange}
+                    onChange={(event) => handleChange (event, 'name')}
                     placeholder='Illness'
-                    value={editIncidence.illness}
+                    value={editIncidence.name}
                 />
                 <input
                     name="symptoms"
-                    onChange={handleChange}
+                    onChange={(event) => handleChange (event, 'symptoms')}
                     placeholder='Symptoms'
                     value={editIncidence.symptoms}
                 />
                 <input
                     name="date"
-                    onChange={handleChange}
+                    onChange={(event) => handleChange (event, 'illness_date')}
                     placeholder='Date'
                     value={editIncidence.date}
                 />

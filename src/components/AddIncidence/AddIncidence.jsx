@@ -57,10 +57,10 @@ function AddIncidence(props) {
         history.push('/results')
     }
 
-    const handleEditClick = () => {
+    const handleEditClick = (item) => {
         // dispatch to the store, the student being edited.
           // using SET_EDIT_STUDENT action
-        dispatch({ type:'SET_EDIT_STUDENT', payload: props.student})
+        dispatch({ type:'SET_EDIT_STUDENT', payload: item})
     
         // Push user to edit page
         history.push('/edit')
@@ -142,7 +142,7 @@ function AddIncidence(props) {
                                 <td>{item.symptoms}</td>
                                 <td>{new Date(item.illness_date).toLocaleDateString()}</td>
                                 <td>
-                                    <button onClick={handleEditClick}>Edit</button>
+                                    <button onClick={() => handleEditClick(item)}>Edit</button>
                                 </td>
                                 <td>
                                     <button onClick={() => handleDelete(item.id)}>Delete</button>

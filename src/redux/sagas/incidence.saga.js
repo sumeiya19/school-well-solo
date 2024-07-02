@@ -54,36 +54,3 @@ function* addStudent(action) {
     }
 }
 
-const initialState = {
-    last_name: '',
-    first_name: '',
-    grade: '',
-    illness: '',
-    symptoms: '',
-    date: ''
-};
-
-const editIncidence = (state = initialState, action) => {
-    switch (action.type) {
-        case 'SET_EDIT_STUDENT':
-            return {
-                ...state,
-                ...action.payload
-            };
-
-        case 'EDIT_ONCHANGE':
-            return {
-                ...state,
-                [action.payload.property]: action.payload.value
-            };
-
-        case 'EDIT_CLEAR':
-            return initialState;
-
-        default:
-            return state;
-    }
-};
-
-
-
