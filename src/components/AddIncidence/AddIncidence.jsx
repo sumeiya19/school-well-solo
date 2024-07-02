@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function AddIncidence() {
+function AddIncidence(props) {
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
     const [grade, setGrade] = useState('');
@@ -56,6 +56,15 @@ function AddIncidence() {
     const handleResult = () => {
         history.push('/results')
     }
+
+    const handleEditClick = () => {
+        // dispatch to the store, the student being edited.
+          // using SET_EDIT_STUDENT action
+        dispatch({ type:'SET_EDIT_STUDENT', payload: props.student})
+    
+        // Push user to edit page
+        history.push('/edit')
+      }
 
     return (
         <>
@@ -118,6 +127,7 @@ function AddIncidence() {
                         <th>Illness</th>
                         <th>Symptoms</th>
                         <th>Date</th>
+                        <th>Edit</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -132,13 +142,16 @@ function AddIncidence() {
                                 <td>{item.symptoms}</td>
                                 <td>{new Date(item.illness_date).toLocaleDateString()}</td>
                                 <td>
+                                    <button onClick={handleEditClick}>Edit</button>
+                                </td>
+                                <td>
                                     <button onClick={() => handleDelete(item.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="7">No incidences to display</td>
+                            <td >No incidences to display</td>
                         </tr>
                     )}
                 </tbody>

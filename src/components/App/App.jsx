@@ -25,6 +25,7 @@ import AddNewStudent from '../AddNewStudent/AddNewStudent';
 import AddIncidenceForm from '../AddIncidenceForm/AddIncidenceForm';
 import Results from '../Results/Results';
 import DisplayEntries from '../DisplayEntries/DisplayEntries';
+import EditForm from '../AddIncidence/EditForm';
 
 import './App.css';
 
@@ -84,6 +85,10 @@ function App() {
 
           <ProtectedRoute exact path = "/addincidenceform">
             <AddIncidenceForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/edit">
+        <EditForm />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/display">

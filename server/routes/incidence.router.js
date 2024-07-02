@@ -111,6 +111,49 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.put('/:id', (req, res) => {
+    const idToUpdate = req.params.id;
+    const { last_name, first_name, grade, name, symptoms, illness_date } = req.body;
 
+    const updateStudentQuery = `
+        UPDATE "student"
+        SET "last_name" = $1, "first_name" = $2, "grade" = $3
+        WHERE "id" = $4
+    `;
+
+    const updateIllnessQuery = `
+        UPDATE "illness"
+        SET "name" = $1
+        WHERE "id" = (SELECT "illness_id" FROM "illness_input" WHERE "student_id" = $2)
+    `;
+
+    const updateIllnessInputQuery = `
+        UPDATE "illness_input"
+        SET "symptoms" = $1, "illness_date" = $2
+        WHERE "student_id" = $3
+    `;
+
+    const studentValues = [last_name, first_name, grade, idToUpdate];
+    const illnessValues = [name, idToUpdate];
+    const illnessInputValues = [symptoms, illness_date, idToUpdate];
+
+    // Update student table
+    pool.query(updateStudentQuery, studentValues)
+        .then(() => {
+            // Update illness table
+            return pool.query(updateIllnessQuery, illnessValues);
+        })
+        .then(() => {
+            // Update illness_input table
+            return pool.query(updateIllnessInputQuery, illnessInputValues);
+        })
+        .then(() => {
+            res.sendStatus(200); // Success response if all updates are successful
+        })
+        .catch((error) => {
+            console.error('Error updating records:', error);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;
