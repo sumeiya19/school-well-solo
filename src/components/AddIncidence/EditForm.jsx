@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function EditForm(props) {
+function EditForm() {
     const dispatch = useDispatch();
     const history = useHistory();
 

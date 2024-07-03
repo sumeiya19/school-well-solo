@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function AddIncidence(props) {
+function AddIncidence() {
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
     const [grade, setGrade] = useState('');
@@ -21,6 +21,7 @@ function AddIncidence(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
+
 
         // Dispatch action with payload
         dispatch({
@@ -50,68 +51,62 @@ function AddIncidence(props) {
     };
 
     const handleNewStudent = () => {
-        history.push('/addnewstudent')
-    }
+        history.push('/addnewstudent');
+    };
 
     const handleResult = () => {
-        history.push('/results')
-    }
+        history.push('/results');
+    };
 
     const handleEditClick = (item) => {
         // dispatch to the store, the student being edited.
-          // using SET_EDIT_STUDENT action
-        dispatch({ type:'SET_EDIT_STUDENT', payload: item})
-    
+        // using SET_EDIT_STUDENT action
+        dispatch({ type: 'SET_EDIT_STUDENT', payload: item });
+
         // Push user to edit page
-        history.push('/edit')
-      }
+        history.push('/edit');
+    };
 
     return (
         <>
-        <button onClick={handleNewStudent}>New Student? Add here!</button>
-        
+            <button onClick={handleNewStudent}>New Student? Add here!</button>
+
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="Last Name"
                     value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                />
+                    onChange={(event) => setLastName(event.target.value)} />
 
                 <input
                     type="text"
                     placeholder="First Name"
                     value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
-                />
+                    onChange={(event) => setFirstName(event.target.value)} />
 
                 <input
                     type="number"
                     placeholder="Grade"
                     value={grade}
-                    onChange={(event) => setGrade(event.target.value)}
-                />
+                    onChange={(event) => setGrade(event.target.value)} />
 
                 <input
                     type="text"
                     placeholder="Illness Name"
                     value={name}
-                    onChange={(event) => setName(event.target.value)}
-                />
+                    onChange={(event) => setName(event.target.value)} />
 
                 <input
                     type="text"
                     placeholder="Symptoms"
                     value={symptoms}
-                    onChange={(event) => setSymptoms(event.target.value)}
-                />
+                    onChange={(event) => setSymptoms(event.target.value)} />
 
                 <input
                     type="date"
                     placeholder="Illness Date"
                     value={illnessDate}
-                    onChange={(event) => setIllnessDate(event.target.value)}
-                />
+                    onChange={(event) => setIllnessDate(event.target.value)} />
 
                 <button type="submit">Add Incidence</button>
             </form>
@@ -151,7 +146,7 @@ function AddIncidence(props) {
                         ))
                     ) : (
                         <tr>
-                            <td >No incidences to display</td>
+                            <td>No incidences to display</td>
                         </tr>
                     )}
                 </tbody>

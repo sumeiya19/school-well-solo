@@ -25,6 +25,7 @@ export default function* rootSaga() {
     yield takeLatest('DELETE_ITEM', deleteIncidence)
     yield takeLatest('FETCH_STUDENT', fetchStudent)
     yield takeLatest('ADD_STUDENT', addStudent)
+    yield takeLatest('FETCH_TOTAL_POPULATION', fetchTotalPopulation)
 }
 
 function* deleteIncidence(action) {
@@ -53,4 +54,16 @@ function* addStudent(action) {
         console.error('Error with student POST request', error);
     }
 }
+
+
+function* fetchTotalPopulation(action) {
+    try {
+        const response = yield call(axios.get, '/api/student/total_pop'); 
+        yield put({ type: 'SET_TOTAL_POPULATION', payload: response.data });
+    } catch (error) {
+        console.error('Error fetching total population:', error);
+    }
+}
+
+
 

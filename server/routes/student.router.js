@@ -50,5 +50,26 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.get('/total_pop', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log('User is authenticated?:', req.isAuthenticated());
+        console.log("Current user is: ", req.user.username);
+        
+        const sqlText = `SELECT COUNT(*) FROM student`; 
+        pool.query(sqlText)
+            .then((result) => {
+                const totalPopulation = result.rows[0].count;
+                res.json(totalPopulation);
+            })
+            .catch((error) => {
+                console.error('Error fetching total population:', error);
+                res.sendStatus(500);
+            });
+    } else {
+        res.sendStatus(401);
+    }
+});
+
+
 
 module.exports = router;
