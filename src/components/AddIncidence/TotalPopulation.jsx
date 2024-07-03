@@ -13,13 +13,13 @@ function TotalPopulation () {
 
     useEffect(() => {
         dispatch({ type: "FETCH_TOTAL_POPULATION" });
-        dispatch({ type: "FETCH_INCIDENCE" });
+        // dispatch({ type: "FETCH_INCIDENCE" });
     }, [dispatch]);
     return (<>
         <div>
-            <h4>Total Population: {totalPopulation}</h4>
-            <h4>Total Incidences: {totalIncidences}</h4>
-            <h4>Incidence Rate: {incidenceRate.toFixed(2)} per 1000</h4>
+            <p>Total Population: {totalPopulation}</p>
+            <p>Total Incidences: {totalIncidences}</p>
+            <p>Incidence Rate: {incidenceRate.toFixed(2)} per 1000</p>
         </div>
 </>)
 }
