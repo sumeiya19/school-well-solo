@@ -1,57 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
-
-// Home page contains all information about the current and past incidence records
-// Button that takes you to 'Add_Incidence' page
+import React from 'react';
+import { useHistory } from 'react-router-dom'
+import './Home.css'
 
 function HomePage() {
-   const history = useHistory(); 
-   const dispatch = useDispatch();
+    const history = useHistory();
 
+    const handleColdRecords = () => {
+        history.push('/coldrecords');
+    };
 
-   const recordList = useSelector((store) => store.recordReducer);
-   useEffect(() => {
-    dispatch({ type: "FETCH_RECORD" });
-}, [dispatch]);
+    const handleFluRecords = () => {
+        history.push('/flurecords');
+    };
 
-   const handleNewIncidence = () => {
-    history.push('/addincidenceform')
-   }
-const handleCurrentIncidence = () => {
-  history.push('/addnewincidence')
+    const handleStrepRecords = () => {
+        history.push('/strep');
+    };
+
+    const handleStomachFluRecords = () => {
+        history.push('/stomachflu');
+    };
+
+    const handlePinkEyeRecords = () => {
+        history.push('/pinkeye');
+    };
+
+    return (
+        <div className="home-container">
+            <h3>Create New Incidence Records</h3>
+
+            <button className="record-button" onClick={handleColdRecords}>Cold Records</button>
+            <button className="record-button" onClick={handleFluRecords}>Flu Records</button>
+            <button className="record-button" onClick={handleStrepRecords}>Strep Records</button>
+            <button className="record-button" onClick={handleStomachFluRecords}>Stomach Flu Records</button>
+            <button className="record-button" onClick={handlePinkEyeRecords}>Pink Eye Records</button>
+        </div>
+    );
 }
 
-const handleNewRecord = () => {
-  history.push('/newrecord')
-}
-
-    return (<>
-    <h3>Create New Incidence Record</h3>
-  <button onClick={handleNewIncidence}>Add New Incidence</button> 
-  <br />
-  <button onClick={handleCurrentIncidence}>Current Incidence</button>
-<br />
-
-<button onClick={handleNewRecord}>Create New Incidence Record</button>
-<br />
-
-<p>Recent Incidence Records</p>
-{recordList && recordList.length > 0 ? (
-                <Link to="/addincidenceform">
-                    {recordList.map((record) => (
-                        <li key={record.id} className="list-group-item">
-                            {record.illness_name} - {new Date(record.incidence_date).toLocaleDateString()}
-                            
-                        </li>
-                    ))}
-                </Link>
-            ) : (
-                <p>No incidence records to display</p>
-            )}
-           
-
-  </> )
-} 
-
-export default HomePage
+export default HomePage;
