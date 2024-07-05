@@ -7,7 +7,7 @@ function DisplayEntries() {
     const incidenceList = useSelector((state) => state.incidenceReducer);
 
     useEffect(() => {
-        dispatch(fetchIncidence());
+        dispatch({ type: "FETCH_INCIDENCE" });
     }, [dispatch]);
 
     return (

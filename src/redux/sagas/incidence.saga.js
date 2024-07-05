@@ -26,6 +26,8 @@ export default function* rootSaga() {
     yield takeLatest('FETCH_STUDENT', fetchStudent)
     yield takeLatest('ADD_STUDENT', addStudent)
     yield takeLatest('FETCH_TOTAL_POPULATION', fetchTotalPopulation)
+    yield takeLatest('FETCH_RECORD', fetchRecord)
+    yield takeLatest('ADD_RECORD', addRecord)
 }
 
 function* deleteIncidence(action) {
@@ -52,6 +54,24 @@ function* addStudent(action) {
         yield put({ type: 'FETCH_STUDENT' }); // Fetch updated incidence list
     } catch (error) {
         console.error('Error with student POST request', error);
+    }
+}
+
+function* addRecord(action) {
+    try {
+        yield call(axios.post, '/api/record', action.payload);
+        yield put({ type: 'FETCH_RECORD' }); // Fetch updated incidence list
+    } catch (error) {
+        console.error('Error with student POST request', error);
+    }
+}
+
+function* fetchRecord(action) {
+    try {
+        const response = yield call(axios.get, '/api/record');
+        yield put({ type: 'SET_RECORD', payload: response.data });
+    } catch (error) {
+        console.error('Error fetching student:', error);
     }
 }
 

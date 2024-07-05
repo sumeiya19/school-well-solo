@@ -38,8 +38,8 @@ function AddIncidenceForm() {
         setSymptoms('');
         setIllnessDate('');
 
-        // Navigate back to the list page
-        history.push('/results');
+        // Navigate back to the home page
+        history.push('/home');
     };
 
     return (
@@ -89,6 +89,8 @@ function AddIncidenceForm() {
 
                 <button type="submit">Add Incidence</button>
             </form>
+
+            
   
             
         </>

@@ -27,6 +27,7 @@ import Results from '../Results/Results';
 import DisplayEntries from '../DisplayEntries/DisplayEntries';
 import EditForm from '../AddIncidence/EditForm';
 import TotalPopulation from '../AddIncidence/TotalPopulation';
+import IncidenceRecord from '../IncidenceRecord/IncidenceRecord';
 
 import './App.css';
 
@@ -100,6 +101,10 @@ function App() {
             <AddIncidence />
             <TotalPopulation />
           </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/newrecord">
+           <IncidenceRecord />
+          </ProtectedRoute>  
 
           <ProtectedRoute exact path = "/addnewstudent">
             <AddNewStudent />
