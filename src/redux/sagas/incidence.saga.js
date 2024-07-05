@@ -72,6 +72,24 @@ function* addStomachFlu(action) {
         console.error('Error with STOMACH FLU POST request', error);
     }
 }
+
+function* fetchStrep() {
+    try {
+        const response = yield call(axios.get, '/api/strep');
+        yield put({ type: 'SET_STREP', payload: response.data });
+    } catch (error) {
+        console.error('Error fetching stomach flu:', error);
+    }
+}
+
+function* addStrep(action) {
+    try {
+        yield call(axios.post, '/api/strep', action.payload);
+        yield put({ type: 'FETCH_STREP' }); // Fetch updated incidence list
+    } catch (error) {
+        console.error('Error with STREP POST request', error);
+    }
+}
 export default function* rootSaga() {
     yield takeLatest('ADD_INCIDENCE', addIncidence);
     yield takeLatest('FETCH_INCIDENCE', fetchIncidence);
@@ -90,6 +108,9 @@ export default function* rootSaga() {
     yield takeLatest('FETCH_STOMACH_FLU', fetchStomachFlu)
     yield takeLatest('ADD_STOMACH_FLU', addStomachFlu)
     yield takeLatest('DELETE_STOMACH_FLU', deleteStomachFlu)
+    yield takeLatest('FETCH_STREP', fetchStrep)
+    yield takeLatest('ADD_STREP', addStrep)
+    yield takeLatest('DELETE_STREP', deleteStrep)
 }
 
 function* deleteIncidence(action) {
@@ -125,6 +146,15 @@ function* deleteStomachFlu(action) {
         yield put({ type: 'FETCH_STOMACH_FLU'});
     } catch (error) {
         console.error('Error with STOMACH FLU DELETE request', error);
+    }
+}
+
+function* deleteStrep(action) {
+    try {
+        yield axios.delete(`/api/strep/${action.payload}`);
+        yield put({ type: 'FETCH_STREP'});
+    } catch (error) {
+        console.error('Error with STREP DELETE request', error);
     }
 }
 

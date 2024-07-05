@@ -34,6 +34,8 @@ import FluRecords from '../FluRecords/FluRecords';
 import EditFlu from '../FluRecords/EditFlu';
 import StomachFlu from '../StomachFlu/StomachFlu';
 import EditStomachFlu from '../StomachFlu/EditStomachFlu';
+import StrepRecords from '../StrepRecords/StrepRecords';
+import EditStrep from '../StrepRecords/EditStrep';
 
 import './App.css';
 
@@ -138,6 +140,14 @@ function App() {
 
           <ProtectedRoute exact path = "/editstomachflu">
             <EditStomachFlu />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/strep">
+            <StrepRecords />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editstrep">
+            <EditStrep />
           </ProtectedRoute>
 
           <Route

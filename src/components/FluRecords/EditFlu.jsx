@@ -72,7 +72,7 @@ function EditFlu() {
                 />
                 <input
                     name="illness"
-                    onChange={(event) => handleChange (event, 'name')}
+                    onChange={(event) => handleChange (event, 'illness')}
                     placeholder='Illness'
                     value={editFlu.illness}
                 />

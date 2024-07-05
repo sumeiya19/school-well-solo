@@ -15,6 +15,7 @@ const recordRouter = require('./routes/record.router')
 const coldRouter = require('./routes/cold.router')
 const fluRouter = require('./routes/flu.router')
 const stomachFluRouter = require('./routes/stomachflu.router')
+const strepRouter = require('./routes/strep.router')
 
 // Express Middleware
 app.use(express.json());
@@ -36,6 +37,7 @@ app.use('/api/record', recordRouter)
 app.use('/api/cold', coldRouter)
 app.use('/api/flu', fluRouter)
 app.use('/api/stomach', stomachFluRouter)
+app.use('/api/strep', strepRouter)
 
 // Listen Server & Port
 app.listen(PORT, () => {

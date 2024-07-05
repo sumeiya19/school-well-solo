@@ -12,6 +12,8 @@ import fluReducer from './flu.reducer';
 import editFlu from './editflu.reducer';
 import stomachFluReducer from './stomachflu.reducer';
 import editStomachFlu from './editstomachflu.reducer';
+import strepReducer from './strep.reducer';
+import editStrep from './editstrep.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -32,6 +34,8 @@ const rootReducer = combineReducers({
   editFlu,
   stomachFluReducer,
   editStomachFlu,
+  strepReducer,
+  editStrep,
 });
 
 export default rootReducer;
