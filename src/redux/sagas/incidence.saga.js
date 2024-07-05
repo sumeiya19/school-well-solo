@@ -37,6 +37,23 @@ function* addCold(action) {
     }
 }
 
+function* fetchFlu() {
+    try {
+        const response = yield call(axios.get, '/api/flu');
+        yield put({ type: 'SET_FLU', payload: response.data });
+    } catch (error) {
+        console.error('Error fetching flu:', error);
+    }
+}
+
+function* addFlu(action) {
+    try {
+        yield call(axios.post, '/api/flu', action.payload);
+        yield put({ type: 'FETCH_FLU' }); // Fetch updated incidence list
+    } catch (error) {
+        console.error('Error with FLU POST request', error);
+    }
+}
 export default function* rootSaga() {
     yield takeLatest('ADD_INCIDENCE', addIncidence);
     yield takeLatest('FETCH_INCIDENCE', fetchIncidence);
@@ -49,6 +66,9 @@ export default function* rootSaga() {
     yield takeLatest('FETCH_COLD', fetchCold)
     yield takeLatest('ADD_COLD', addCold)
     yield takeLatest('DELETE_COLD', deleteCold)
+    yield takeLatest('FETCH_FLU', fetchFlu)
+    yield takeLatest('ADD_FLU', addFlu)
+    yield takeLatest('DELETE_FLU', deleteFlu)
 }
 
 function* deleteIncidence(action) {
@@ -66,6 +86,15 @@ function* deleteCold(action) {
         yield put({ type: 'FETCH_COLD'});
     } catch (error) {
         console.error('Error with Cold DELETE request', error);
+    }
+}
+
+function* deleteFlu(action) {
+    try {
+        yield axios.delete(`/api/flu/${action.payload}`);
+        yield put({ type: 'FETCH_FLU'});
+    } catch (error) {
+        console.error('Error with FLU DELETE request', error);
     }
 }
 

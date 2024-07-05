@@ -8,6 +8,8 @@ import totalPopulationReducer from './population.reducer';
 import recordReducer from './record.reducer';
 import coldRecordsReducer from './cold.reducer';
 import editCold from './editcold.reducer';
+import fluReducer from './flu.reducer';
+import editFlu from './editflu.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -23,7 +25,9 @@ const rootReducer = combineReducers({
   totalPopulationReducer,
   recordReducer,
   coldRecordsReducer,
-  editCold
+  editCold,
+  fluReducer,
+  editFlu,
 });
 
 export default rootReducer;

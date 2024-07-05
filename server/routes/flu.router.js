@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+//Get Router for Flu Record
 router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `
         SELECT 
@@ -10,13 +11,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             "student"."last_name", 
             "student"."first_name", 
             "student"."grade", 
-            "illness_input"."illness_date", 
+            "flu_record"."illness_date", 
             "illness"."name" AS "illness", 
-            "illness_input"."symptoms"
+            "flu_record"."symptoms"
         FROM 
             "student"
         JOIN 
-            "illness_input" ON "student"."id" = "illness_input"."student_id"
+            "flu_record" ON "student"."id" = "flu_record"."student_id"
         JOIN "illness" ON "illness_id" = "illness"."id"
         WHERE 
             "student"."user_id" = $1;
@@ -32,6 +33,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+//Post Router for new Cold Record
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('User is authenticated?:', req.isAuthenticated());
     console.log("Current user is: ", req.user.username);
@@ -52,7 +54,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     `;
 
     const insertIllnessInputQuery = `
-        INSERT INTO "illness_input" ("illness_id", "symptoms", "illness_date", "student_id")
+        INSERT INTO "flu_record" ("illness_id", "symptoms", "illness_date", "student_id")
         VALUES ($1, $2, $3, $4)
     `;
 
@@ -69,14 +71,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
                 .then((illnessResult) => {
                     const illnessId = illnessResult.rows[0].id;
 
-                    // Insert into illness_input table
+                    // Insert into cold_record table
                     const illnessInputValues = [illnessId, symptoms, illness_date, studentId];
                     return pool.query(insertIllnessInputQuery, illnessInputValues)
                         .then(() => {
                             res.sendStatus(201); // Success response if all inserts are successful
                         })
                         .catch((error) => {
-                            console.error('Error inserting into illness_input:', error);
+                            console.error('Error inserting into flu_record:', error);
                             res.sendStatus(500);
                         });
                 })
@@ -90,7 +92,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });
 });
-
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const incidenceId = req.params.id;
@@ -128,11 +129,11 @@ router.put('/:id', (req, res) => {
     const updateIllnessQuery = `
         UPDATE "illness"
         SET "name" = $1
-        WHERE "id" = (SELECT "illness_id" FROM "illness_input" WHERE "student_id" = $2)
+        WHERE "id" = (SELECT "illness_id" FROM "flu_record" WHERE "student_id" = $2)
     `;
 
     const updateIllnessInputQuery = `
-        UPDATE "illness_input"
+        UPDATE "flu_record"
         SET "symptoms" = $1, "illness_date" = $2
         WHERE "student_id" = $3
     `;
@@ -148,7 +149,7 @@ router.put('/:id', (req, res) => {
             return pool.query(updateIllnessQuery, illnessValues);
         })
         .then(() => {
-            // Update illness_input table
+            // Update flu_record table
             return pool.query(updateIllnessInputQuery, illnessInputValues);
         })
         .then(() => {

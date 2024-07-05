@@ -30,6 +30,8 @@ import TotalPopulation from '../AddIncidence/TotalPopulation';
 import IncidenceRecord from '../IncidenceRecord/IncidenceRecord';
 import ColdRecords from '../ColdRecords/ColdRecords';
 import EditColdRecord from '../ColdRecords/EditColdRecord';
+import FluRecords from '../FluRecords/FluRecords';
+import EditFlu from '../FluRecords/EditFlu';
 
 import './App.css';
 
@@ -118,6 +120,14 @@ function App() {
 
           <ProtectedRoute exact path = "/coldrecords">
             <ColdRecords />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/flurecords">
+            <FluRecords />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editflu">
+            <EditFlu />
           </ProtectedRoute>
 
           <Route
