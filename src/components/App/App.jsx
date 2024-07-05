@@ -36,8 +36,16 @@ import StomachFlu from '../StomachFlu/StomachFlu';
 import EditStomachFlu from '../StomachFlu/EditStomachFlu';
 import StrepRecords from '../StrepRecords/StrepRecords';
 import EditStrep from '../StrepRecords/EditStrep';
+import PinkEyeRecords from '../PinkEyeRecords/PinkEyeRecords';
+import EditPinkEye from '../PinkEyeRecords/EditPinkEye';
+import ColdTotalPopulation from '../ColdRecords/ColdTotalPopulation';
+import FluTotal from '../FluRecords/FluTotal';
+import PinkEyeTotal from '../PinkEyeRecords/PinkEyeTotal';
+import StomachFluTotal from '../StomachFlu/StomachFluTotal';
+import StrepTotal from '../StrepRecords/StrepTotal';
 
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -124,10 +132,12 @@ function App() {
 
           <ProtectedRoute exact path = "/coldrecords">
             <ColdRecords />
+            <ColdTotalPopulation />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/flurecords">
             <FluRecords />
+            <FluTotal />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/editflu">
@@ -136,6 +146,7 @@ function App() {
 
           <ProtectedRoute exact path = "/stomachflu">
             <StomachFlu />
+            <StomachFluTotal />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/editstomachflu">
@@ -144,10 +155,20 @@ function App() {
 
           <ProtectedRoute exact path = "/strep">
             <StrepRecords />
+            <StrepTotal />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/editstrep">
             <EditStrep />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/pinkeye">
+            <PinkEyeRecords />
+            <PinkEyeTotal />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editpinkeye">
+            <EditPinkEye />
           </ProtectedRoute>
 
           <Route

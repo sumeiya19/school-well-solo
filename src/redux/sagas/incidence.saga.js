@@ -90,6 +90,24 @@ function* addStrep(action) {
         console.error('Error with STREP POST request', error);
     }
 }
+
+function* fetchPinkEye() {
+    try {
+        const response = yield call(axios.get, '/api/pinkeye');
+        yield put({ type: 'SET_PINK_EYE', payload: response.data });
+    } catch (error) {
+        console.error('Error fetching PINK EYE:', error);
+    }
+}
+
+function* addPinkEye(action) {
+    try {
+        yield call(axios.post, '/api/pinkeye', action.payload);
+        yield put({ type: 'FETCH_PINK_EYE' }); // Fetch updated incidence list
+    } catch (error) {
+        console.error('Error with PINK EYE POST request', error);
+    }
+}
 export default function* rootSaga() {
     yield takeLatest('ADD_INCIDENCE', addIncidence);
     yield takeLatest('FETCH_INCIDENCE', fetchIncidence);
@@ -111,6 +129,9 @@ export default function* rootSaga() {
     yield takeLatest('FETCH_STREP', fetchStrep)
     yield takeLatest('ADD_STREP', addStrep)
     yield takeLatest('DELETE_STREP', deleteStrep)
+    yield takeLatest('FETCH_PINK_EYE', fetchPinkEye)
+    yield takeLatest('ADD_PINK_EYE', addPinkEye)
+    yield takeLatest('DELETE_PINK_EYE', deletePinkEye)
 }
 
 function* deleteIncidence(action) {
@@ -155,6 +176,15 @@ function* deleteStrep(action) {
         yield put({ type: 'FETCH_STREP'});
     } catch (error) {
         console.error('Error with STREP DELETE request', error);
+    }
+}
+
+function* deletePinkEye(action) {
+    try {
+        yield axios.delete(`/api/pinkeye/${action.payload}`);
+        yield put({ type: 'FETCH_PINK_EYE'});
+    } catch (error) {
+        console.error('Error with PINK EYE DELETE request', error);
     }
 }
 

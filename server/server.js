@@ -16,6 +16,7 @@ const coldRouter = require('./routes/cold.router')
 const fluRouter = require('./routes/flu.router')
 const stomachFluRouter = require('./routes/stomachflu.router')
 const strepRouter = require('./routes/strep.router')
+const pinkEyeRouter = require('./routes/pinkeye.router')
 
 // Express Middleware
 app.use(express.json());
@@ -38,6 +39,7 @@ app.use('/api/cold', coldRouter)
 app.use('/api/flu', fluRouter)
 app.use('/api/stomach', stomachFluRouter)
 app.use('/api/strep', strepRouter)
+app.use('/api/pinkeye', pinkEyeRouter)
 
 // Listen Server & Port
 app.listen(PORT, () => {
