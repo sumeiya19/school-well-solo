@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const incidenceRouter = require('./routes/incidence.router')
 const studentRouter = require('./routes/student.router')
 const recordRouter = require('./routes/record.router')
+const coldRouter = require('./routes/cold.router')
 
 // Express Middleware
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/api/incidence', incidenceRouter)
 app.use('/api/student', studentRouter)
 app.use('/api/record', recordRouter)
+app.use('/api/cold', coldRouter)
 
 // Listen Server & Port
 app.listen(PORT, () => {

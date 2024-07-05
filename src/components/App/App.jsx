@@ -28,6 +28,8 @@ import DisplayEntries from '../DisplayEntries/DisplayEntries';
 import EditForm from '../AddIncidence/EditForm';
 import TotalPopulation from '../AddIncidence/TotalPopulation';
 import IncidenceRecord from '../IncidenceRecord/IncidenceRecord';
+import ColdRecords from '../ColdRecords/ColdRecords';
+import EditColdRecord from '../ColdRecords/EditColdRecord';
 
 import './App.css';
 
@@ -93,6 +95,10 @@ function App() {
         <EditForm />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path = "/editcold">
+        <EditColdRecord />
+          </ProtectedRoute>
+
           <ProtectedRoute exact path = "/display">
             <DisplayEntries />
           </ProtectedRoute>
@@ -108,6 +114,10 @@ function App() {
 
           <ProtectedRoute exact path = "/addnewstudent">
             <AddNewStudent />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/coldrecords">
+            <ColdRecords />
           </ProtectedRoute>
 
           <Route

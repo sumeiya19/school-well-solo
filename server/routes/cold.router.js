@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+//Get Router for Cold Record
 router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `
         SELECT 
@@ -10,13 +11,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             "student"."last_name", 
             "student"."first_name", 
             "student"."grade", 
-            "illness_input"."illness_date", 
+            "cold_record"."illness_date", 
             "illness"."name" AS "illness", 
-            "illness_input"."symptoms"
+            "cold_record"."symptoms"
         FROM 
             "student"
         JOIN 
-            "illness_input" ON "student"."id" = "illness_input"."student_id"
+            "cold_record" ON "student"."id" = "cold_record"."student_id"
         JOIN "illness" ON "illness_id" = "illness"."id"
         WHERE 
             "student"."user_id" = $1;
@@ -32,6 +33,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+//Post Router for new Cold Record
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('User is authenticated?:', req.isAuthenticated());
     console.log("Current user is: ", req.user.username);
@@ -52,7 +54,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     `;
 
     const insertIllnessInputQuery = `
-        INSERT INTO "illness_input" ("illness_id", "symptoms", "illness_date", "student_id")
+        INSERT INTO "cold_record" ("illness_id", "symptoms", "illness_date", "student_id")
         VALUES ($1, $2, $3, $4)
     `;
 
@@ -69,14 +71,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
                 .then((illnessResult) => {
                     const illnessId = illnessResult.rows[0].id;
 
-                    // Insert into illness_input table
+                    // Insert into cold_record table
                     const illnessInputValues = [illnessId, symptoms, illness_date, studentId];
                     return pool.query(insertIllnessInputQuery, illnessInputValues)
                         .then(() => {
                             res.sendStatus(201); // Success response if all inserts are successful
                         })
                         .catch((error) => {
-                            console.error('Error inserting into illness_input:', error);
+                            console.error('Error inserting into cold_record:', error);
                             res.sendStatus(500);
                         });
                 })
@@ -90,7 +92,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });
 });
-
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const incidenceId = req.params.id;
@@ -111,53 +112,53 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
-// router.put('/:id', (req, res) => {
-//     const idToUpdate = req.params.id;
-//     const { last_name, first_name, grade, name, symptoms, illness_date } = req.body;
+router.put('/:id', (req, res) => {
+    const idToUpdate = req.params.id;
+    const { last_name, first_name, grade, name, symptoms, illness_date } = req.body;
 
-//     console.log('Last Name', last_name);
-//     console.log('First', first_name);
-//     console.log('Req.body', req.body);
+    console.log('Last Name', last_name);
+    console.log('First', first_name);
+    console.log('Req.body', req.body);
 
-//     const updateStudentQuery = `
-//         UPDATE "student"
-//         SET "last_name" = $1, "first_name" = $2, "grade" = $3
-//         WHERE "id" = $4
-//     `;
+    const updateStudentQuery = `
+        UPDATE "student"
+        SET "last_name" = $1, "first_name" = $2, "grade" = $3
+        WHERE "id" = $4
+    `;
 
-//     const updateIllnessQuery = `
-//         UPDATE "illness"
-//         SET "name" = $1
-//         WHERE "id" = (SELECT "illness_id" FROM "illness_input" WHERE "student_id" = $2)
-//     `;
+    const updateIllnessQuery = `
+        UPDATE "illness"
+        SET "name" = $1
+        WHERE "id" = (SELECT "illness_id" FROM "cold_record" WHERE "student_id" = $2)
+    `;
 
-//     const updateIllnessInputQuery = `
-//         UPDATE "illness_input"
-//         SET "symptoms" = $1, "illness_date" = $2
-//         WHERE "student_id" = $3
-//     `;
+    const updateIllnessInputQuery = `
+        UPDATE "cold_record"
+        SET "symptoms" = $1, "illness_date" = $2
+        WHERE "student_id" = $3
+    `;
 
-//     const studentValues = [last_name, first_name, grade, idToUpdate];
-//     const illnessValues = [name, idToUpdate];
-//     const illnessInputValues = [symptoms, illness_date, idToUpdate];
+    const studentValues = [last_name, first_name, grade, idToUpdate];
+    const illnessValues = [name, idToUpdate];
+    const illnessInputValues = [symptoms, illness_date, idToUpdate];
 
-//     // Update student table
-//     pool.query(updateStudentQuery, studentValues)
-//         .then(() => {
-//             // Update illness table
-//             return pool.query(updateIllnessQuery, illnessValues);
-//         })
-//         .then(() => {
-//             // Update illness_input table
-//             return pool.query(updateIllnessInputQuery, illnessInputValues);
-//         })
-//         .then(() => {
-//             res.sendStatus(200); 
-//         })
-//         .catch((error) => {
-//             console.error('Error updating records:', error);
-//             res.sendStatus(500);
-//         });
-// });
+    // Update student table
+    pool.query(updateStudentQuery, studentValues)
+        .then(() => {
+            // Update illness table
+            return pool.query(updateIllnessQuery, illnessValues);
+        })
+        .then(() => {
+            // Update illness_input table
+            return pool.query(updateIllnessInputQuery, illnessInputValues);
+        })
+        .then(() => {
+            res.sendStatus(200); 
+        })
+        .catch((error) => {
+            console.error('Error updating records:', error);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;

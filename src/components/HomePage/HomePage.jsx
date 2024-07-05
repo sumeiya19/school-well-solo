@@ -38,7 +38,7 @@ const handleNewRecord = () => {
 
 <p>Recent Incidence Records</p>
 {recordList && recordList.length > 0 ? (
-                <Link to="/addnewincidence">
+                <Link to="/addincidenceform">
                     {recordList.map((record) => (
                         <li key={record.id} className="list-group-item">
                             {record.illness_name} - {new Date(record.incidence_date).toLocaleDateString()}

@@ -45,6 +45,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             console.log('Error making POST insert for incidence record:', error);
             res.sendStatus(500);
         });
-});
+}); 
 
 module.exports = router;
