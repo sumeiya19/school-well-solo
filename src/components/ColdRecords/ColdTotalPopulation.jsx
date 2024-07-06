@@ -18,7 +18,7 @@ function ColdTotalPopulation() {
     return (
         <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" mt={4}>
             <div>
-                <p style={{ fontFamily: 'Arial', fontSize: '18px', fontWeight: 'bold', textAlign: 'center' }}>Cold Incidence Statistics</p>
+                <p><b>Cold Incidence Statistics</b></p>
                 <p>Total Population: {totalPopulation}</p>
                 <p>Total Incidences: {totalIncidences}</p>
                 <p>Incidence Rate: {incidenceRate.toFixed(2)} per 1000</p>

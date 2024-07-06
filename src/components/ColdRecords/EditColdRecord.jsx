@@ -47,7 +47,7 @@ function EditColdRecord() {
     return (
         <>
             <h2>Edit Student</h2>
-            <p>About to edit: {editCold.last_name} {editCold.first_name} with id: {editCold.id}</p>
+            <p>About to edit: {editCold.last_name} {editCold.first_name} {editCold.illness} with id: {editCold.id}</p>
 
 
             <form onSubmit={handleSubmit}>

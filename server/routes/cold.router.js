@@ -18,20 +18,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             "student"
         JOIN 
             "cold_record" ON "student"."id" = "cold_record"."student_id"
-        JOIN "illness" ON "illness_id" = "illness"."id"
+        LEFT JOIN 
+            "illness" ON "cold_record"."illness_id" = "illness"."id"
         WHERE 
             "student"."user_id" = $1;
     `;
 
     pool.query(queryText, [req.user.id])
-        .then((result) => {
-            res.json(result.rows);
+        .then(result => {
+            res.send(result.rows);
         })
-        .catch((error) => {
-            console.error('Error retrieving data:', error);
+        .catch(error => {
+            console.log('Error executing query', error);
             res.sendStatus(500);
         });
 });
+
 
 //Post Router for new Cold Record
 router.post('/', rejectUnauthenticated, (req, res) => {

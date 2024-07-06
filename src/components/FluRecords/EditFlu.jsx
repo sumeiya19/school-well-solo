@@ -1,94 +1,112 @@
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function EditFlu() {
-
-
     const dispatch = useDispatch();
     const history = useHistory();
 
-    useEffect(() => {
-        dispatch({ type: "FETCH_COLD" });
-    }, [dispatch]);
-
     const editFlu = useSelector((store) => store.editFlu);
 
-    function handleChange(event, property) {
+    useEffect(() => {
+        dispatch({ type: "FETCH_FLU" });
+    }, [dispatch]);
+
+    const handleChange = (event, property) => {
         dispatch({
             type: 'EDIT_ONCHANGE',
             payload: { property: property, value: event.target.value }
         });
-    }
+    };
 
-    function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
-        // PUT REQUEST to /students/:id
         axios.put(`/api/flu/${editFlu.id}`, editFlu)
             .then(response => {
-                // clean up reducer data
                 dispatch({ type: 'EDIT_CLEAR' });
-
-                
-                history.push('/flurecords'); // back to list
+                history.push('/flurecords');
             })
             .catch(error => {
-                console.log('error on PUT: ', error);
+                console.log('Error on PUT: ', error);
             });
-    }
+    };
 
-    
-    // if (!editIncidence) {
-    //     return <p>Loading...</p>;
-    // }
-    console.log('Edit Incidence ID', editFlu.id);
+    // Format date to "yyyy-MM-dd" for input field
+    const formatDateForInput = (dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        if (month < 10) month = '0' + month;
+        if (day < 10) day = '0' + day;
+        return `${year}-${month}-${day}`;
+    };
+
     return (
         <>
             <h2>Edit Student</h2>
             <p>About to edit: {editFlu.last_name} {editFlu.first_name} with id: {editFlu.id}</p>
 
-
             <form onSubmit={handleSubmit}>
-                <input
+                <TextField
                     name="last_name"
                     onChange={(event) => handleChange(event, 'last_name')}
-                    placeholder='Last Name'
+                    label="Last Name"
                     value={editFlu.last_name}
+                    margin="normal"
+                    fullWidth
                 />
-                <input
+                <TextField
                     name="first_name"
-                    onChange={(event) => handleChange (event, 'first_name')}
-                    placeholder='First Name'
+                    onChange={(event) => handleChange(event, 'first_name')}
+                    label="First Name"
                     value={editFlu.first_name}
+                    margin="normal"
+                    fullWidth
                 />
-                <input
-                    type='number'
+                <TextField
+                    type="number"
                     name="grade"
-                    onChange={(event) => handleChange (event, 'grade')}
-                    placeholder='Grade'
+                    onChange={(event) => handleChange(event, 'grade')}
+                    label="Grade"
                     value={editFlu.grade}
+                    margin="normal"
+                    fullWidth
                 />
-                <input
+                <TextField
                     name="illness"
-                    onChange={(event) => handleChange (event, 'illness')}
-                    placeholder='Illness'
+                    onChange={(event) => handleChange(event, 'illness')}
+                    label="Illness"
                     value={editFlu.illness}
+                    margin="normal"
+                    fullWidth
                 />
-                <input
+                <TextField
                     name="symptoms"
-                    onChange={(event) => handleChange (event, 'symptoms')}
-                    placeholder='Symptoms'
+                    onChange={(event) => handleChange(event, 'symptoms')}
+                    label="Symptoms"
                     value={editFlu.symptoms}
+                    margin="normal"
+                    fullWidth
                 />
-                <input
-                    name="date"
-                    onChange={(event) => handleChange (event, 'illness_date')}
-                    placeholder='Date'
-                    value={editFlu.illness_date}
+                <TextField
+                    type="date"
+                    name="illness_date"
+                    onChange={(event) => handleChange(event, 'illness_date')}
+                    label="Date"
+                    value={formatDateForInput(editFlu.illness_date)}
+                    InputLabelProps={{ shrink: true }}
+                    margin="normal"
+                    fullWidth
                 />
-                <input type='submit' value='Update Student' />
+                <Button type="submit" variant="contained" color="primary">
+                    Update Student
+                </Button>
             </form>
         </>
     );

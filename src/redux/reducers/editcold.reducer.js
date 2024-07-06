@@ -1,5 +1,3 @@
-
-
 const editCold = (state = {}, action) => {
     switch (action.type) {
         case 'SET_EDIT_STUDENT':
@@ -15,11 +13,12 @@ const editCold = (state = {}, action) => {
             };
 
         case 'EDIT_CLEAR':
-            return '';
+            return {}; // Return an empty object to clear all properties
 
         default:
             return state;
     }
 };
 
-export default editCold
+export default editCold;
+

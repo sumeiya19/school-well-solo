@@ -36,15 +36,17 @@ function* addCold(action) {
         console.error('Error with incidence POST request', error);
     }
 }
-
 function* fetchFlu() {
     try {
-        const response = yield call(axios.get, '/api/flu');
+        const response = yield axios.get('/api/flu');
+        console.log('Fetched flu records:', response.data);
+
         yield put({ type: 'SET_FLU', payload: response.data });
     } catch (error) {
-        console.error('Error fetching flu:', error);
+        console.log('Error fetching flu records:', error);
     }
 }
+
 
 function* addFlu(action) {
     try {
