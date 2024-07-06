@@ -80,7 +80,7 @@ function EditStrep() {
                 />
                 <TextField
                     name="illness"
-                    onChange={(event) => handleChange(event, 'illness')}
+                    onChange={(event) => handleChange(event, 'name')}
                     label="Illness"
                     value={editStrep.name} 
                     margin="normal"

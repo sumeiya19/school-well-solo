@@ -32,7 +32,7 @@ function EditColdRecord() {
                 console.log('Error on PUT: ', error);
             });
     };
-    // Format date to "yyyy-MM-dd" for input field
+ 
     // Format date to "yyyy-MM-dd" for input field
     const formatDateForInput = (dateString) => {
         if (!dateString) return '';
@@ -106,7 +106,7 @@ function EditColdRecord() {
                             type="date"
                             name="illness_date"
                             label="Date"
-                            value={editCold.illness_date}
+                            value={formatDateForInput(editCold.illness_date)}
                             onChange={(event) => handleChange(event, 'illness_date')}
                             InputLabelProps={{ shrink: true }}
                         />
@@ -123,3 +123,4 @@ function EditColdRecord() {
 }
 
 export default EditColdRecord;
+

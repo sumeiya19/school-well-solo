@@ -12,7 +12,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             "student"."first_name", 
             "student"."grade", 
             "pink_eye"."illness_date", 
-            "illness"."name" AS "illness", 
+            "illness"."name", 
             "pink_eye"."symptoms"
         FROM 
             "student"

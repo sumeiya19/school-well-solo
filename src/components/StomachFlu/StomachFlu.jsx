@@ -152,7 +152,7 @@ function StomachFlu() {
                                     <TableCell>{item.last_name}</TableCell>
                                     <TableCell>{item.first_name}</TableCell>
                                     <TableCell>{item.grade}</TableCell>
-                                    <TableCell>{item.illness}</TableCell>
+                                    <TableCell>{item.name}</TableCell>
                                     <TableCell>{item.symptoms}</TableCell>
                                     <TableCell>{new Date(item.illness_date).toLocaleDateString()}</TableCell>
                                     <TableCell>

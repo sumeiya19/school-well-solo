@@ -80,9 +80,9 @@ function EditPinkEyeRecord() {
                 />
                 <TextField
                     name="illness"
-                    onChange={(event) => handleChange(event, 'illness')}
+                    onChange={(event) => handleChange(event, 'name')}
                     label="Illness"
-                    value={editPinkEye.illness}
+                    value={editPinkEye.name}
                     margin="normal"
                     fullWidth
                 />
