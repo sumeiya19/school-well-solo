@@ -22,6 +22,7 @@ function AddIncidence() {
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
 
+
         // Dispatch action with payload
         dispatch({
             type: 'ADD_INCIDENCE',
@@ -49,50 +50,63 @@ function AddIncidence() {
         dispatch({ type: 'DELETE_ITEM', payload: id });
     };
 
+    const handleNewStudent = () => {
+        history.push('/addnewstudent');
+    };
+
+    const handleResult = () => {
+        history.push('/results');
+    };
+
+    const handleEditClick = (item) => {
+        // dispatch to the store, the student being edited.
+        // using SET_EDIT_STUDENT action
+        dispatch({ type: 'SET_EDIT_STUDENT', payload: item });
+
+        // Push user to edit page
+        history.push('/edit');
+    };
+
     return (
         <>
+            <button onClick={handleNewStudent}>New Student? Add here!</button>
+
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="Last Name"
                     value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                />
+                    onChange={(event) => setLastName(event.target.value)} />
 
                 <input
                     type="text"
                     placeholder="First Name"
                     value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
-                />
+                    onChange={(event) => setFirstName(event.target.value)} />
 
                 <input
                     type="number"
                     placeholder="Grade"
                     value={grade}
-                    onChange={(event) => setGrade(event.target.value)}
-                />
+                    onChange={(event) => setGrade(event.target.value)} />
 
                 <input
                     type="text"
                     placeholder="Illness Name"
                     value={name}
-                    onChange={(event) => setName(event.target.value)}
-                />
+                    onChange={(event) => setName(event.target.value)} />
 
                 <input
                     type="text"
                     placeholder="Symptoms"
                     value={symptoms}
-                    onChange={(event) => setSymptoms(event.target.value)}
-                />
+                    onChange={(event) => setSymptoms(event.target.value)} />
 
                 <input
                     type="date"
                     placeholder="Illness Date"
                     value={illnessDate}
-                    onChange={(event) => setIllnessDate(event.target.value)}
-                />
+                    onChange={(event) => setIllnessDate(event.target.value)} />
 
                 <button type="submit">Add Incidence</button>
             </form>
@@ -108,6 +122,7 @@ function AddIncidence() {
                         <th>Illness</th>
                         <th>Symptoms</th>
                         <th>Date</th>
+                        <th>Edit</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -122,17 +137,21 @@ function AddIncidence() {
                                 <td>{item.symptoms}</td>
                                 <td>{new Date(item.illness_date).toLocaleDateString()}</td>
                                 <td>
+                                    <button onClick={() => handleEditClick(item)}>Edit</button>
+                                </td>
+                                <td>
                                     <button onClick={() => handleDelete(item.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="7">No incidences to display</td>
+                            <td>No incidences to display</td>
                         </tr>
                     )}
                 </tbody>
             </table>
+            <button onClick={handleResult}>Submit</button>
 
         </>
     );

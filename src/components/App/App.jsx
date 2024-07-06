@@ -21,8 +21,31 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import HomePage from '../HomePage/HomePage';
 import AddIncidence from '../AddIncidence/AddIncidence';
+import AddNewStudent from '../AddNewStudent/AddNewStudent';
+import AddIncidenceForm from '../AddIncidenceForm/AddIncidenceForm';
+import Results from '../Results/Results';
+import DisplayEntries from '../DisplayEntries/DisplayEntries';
+import EditForm from '../AddIncidence/EditForm';
+import TotalPopulation from '../AddIncidence/TotalPopulation';
+import IncidenceRecord from '../IncidenceRecord/IncidenceRecord';
+import ColdRecords from '../ColdRecords/ColdRecords';
+import EditColdRecord from '../ColdRecords/EditColdRecord';
+import FluRecords from '../FluRecords/FluRecords';
+import EditFlu from '../FluRecords/EditFlu';
+import StomachFlu from '../StomachFlu/StomachFlu';
+import EditStomachFlu from '../StomachFlu/EditStomachFlu';
+import StrepRecords from '../StrepRecords/StrepRecords';
+import EditStrep from '../StrepRecords/EditStrep';
+import PinkEyeRecords from '../PinkEyeRecords/PinkEyeRecords';
+import EditPinkEye from '../PinkEyeRecords/EditPinkEye';
+import ColdTotalPopulation from '../ColdRecords/ColdTotalPopulation';
+import FluTotal from '../FluRecords/FluTotal';
+import PinkEyeTotal from '../PinkEyeRecords/PinkEyeTotal';
+import StomachFluTotal from '../StomachFlu/StomachFluTotal';
+import StrepTotal from '../StrepRecords/StrepTotal';
 
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -74,8 +97,78 @@ function App() {
             <HomePage/>
           </ProtectedRoute>
 
+          <ProtectedRoute exact path = "/results">
+            <Results />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/addincidenceform">
+            <AddIncidenceForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/edit">
+        <EditForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editcold">
+        <EditColdRecord />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/display">
+            <DisplayEntries />
+          </ProtectedRoute>
+
           <ProtectedRoute exact path = "/addnewincidence">
             <AddIncidence />
+            <TotalPopulation />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/newrecord">
+           <IncidenceRecord />
+          </ProtectedRoute>  
+
+          <ProtectedRoute exact path = "/addnewstudent">
+            <AddNewStudent />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/coldrecords">
+            <ColdRecords />
+            <ColdTotalPopulation />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/flurecords">
+            <FluRecords />
+            <FluTotal />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editflu">
+            <EditFlu />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/stomachflu">
+            <StomachFlu />
+            <StomachFluTotal />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editstomachflu">
+            <EditStomachFlu />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/strep">
+            <StrepRecords />
+            <StrepTotal />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editstrep">
+            <EditStrep />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/pinkeye">
+            <PinkEyeRecords />
+            <PinkEyeTotal />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editpinkeye">
+            <EditPinkEye />
           </ProtectedRoute>
 
           <Route

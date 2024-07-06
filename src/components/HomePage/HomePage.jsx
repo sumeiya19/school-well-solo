@@ -1,21 +1,41 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
-// Home page contains all information about the current and past incidence records
-// Button that takes you to 'Add_Incidence' page
+import React from 'react';
+import { useHistory } from 'react-router-dom'
+import './Home.css'
 
 function HomePage() {
-   const history = useHistory(); 
+    const history = useHistory();
 
-   const handleNewIncidence = () => {
-    history.push('/addnewincidence')
-   }
-    return (<>
-    <h3>Create New Incidence Record</h3>
-  <button onClick={handleNewIncidence}>Add New Incidence</button>
+    const handleColdRecords = () => {
+        history.push('/coldrecords');
+    };
 
-  </> )
-} 
+    const handleFluRecords = () => {
+        history.push('/flurecords');
+    };
 
-export default HomePage
+    const handleStrepRecords = () => {
+        history.push('/strep');
+    };
+
+    const handleStomachFluRecords = () => {
+        history.push('/stomachflu');
+    };
+
+    const handlePinkEyeRecords = () => {
+        history.push('/pinkeye');
+    };
+
+    return (
+        <div className="home-container">
+            <h3>Create New Incidence Records</h3>
+
+            <button className="record-button" onClick={handleColdRecords}>Cold Records</button>
+            <button className="record-button" onClick={handleFluRecords}>Flu Records</button>
+            <button className="record-button" onClick={handleStrepRecords}>Strep Records</button>
+            <button className="record-button" onClick={handleStomachFluRecords}>Stomach Flu Records</button>
+            <button className="record-button" onClick={handlePinkEyeRecords}>Pink Eye Records</button>
+        </div>
+    );
+}
+
+export default HomePage;

@@ -1,11 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .nav {
-  /* flex box layout */
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin: 0 0 30px;
-  background-color: #00acb0;
+  background-color: #1976d2; /* Updated blue color */
   overflow: hidden;
 }
 
@@ -19,24 +19,24 @@
   color: #f2f2f2;
   padding-left: 10px;
   margin: 0;
+  font-family: 'Roboto', sans-serif; /* Use Roboto font */
 }
 
 .navLink {
   display: inline-block;
   color: #f2f2f2;
-  background-color: #00acb0;
+  background-color: #1976d2; /* Updated blue color */
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
   border: none;
   cursor: pointer;
   outline: 0;
+  font-family: 'Roboto', sans-serif; /* Use Roboto font */
 }
 
 .navLink:hover {
-  background-color: #008183;
+  background-color: #1565c0; /* Darker shade on hover */
 }
+
