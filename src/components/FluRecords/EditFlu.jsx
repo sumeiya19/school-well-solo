@@ -80,9 +80,9 @@ function EditFlu() {
                 />
                 <TextField
                     name="illness"
-                    onChange={(event) => handleChange(event, 'illness')}
+                    onChange={(event) => handleChange(event, 'name')}
                     label="Illness"
-                    value={editFlu.illness}
+                    value={editFlu.name}
                     margin="normal"
                     fullWidth
                 />
