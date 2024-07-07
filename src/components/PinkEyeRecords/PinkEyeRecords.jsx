@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { TextField, Grid, Box } from '@mui/material'; // Import Material-UI components
+import { TextField, Grid, Box, Select, MenuItem, InputLabel, FormControl } from '@mui/material'; // Import Material-UI components
 import { styled } from '@mui/system'; // Import styled for custom styling
 
 const CustomTextField = styled(TextField)({
@@ -93,22 +93,31 @@ function PinkEyeRecords() {
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <CustomTextField
+                        <InputLabel id="grade-label">Grade</InputLabel>
+                        <Select
                             fullWidth
-                            type="number"
-                            label="Grade"
+                            labelId="grade-label"
+                            id="grade"
                             value={grade}
                             onChange={(event) => setGrade(event.target.value)}
-                        />
+                        >
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                        </Select>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <CustomTextField
-                            fullWidth
-                            type="text"
-                            label="Illness Name"
-                            value={name}
-                            onChange={(event) => setName(event.target.value)}
-                        />
+                    <Grid item xs={12} sm={4}>
+                        <FormControl fullWidth>
+                            <InputLabel id="illness-label">Illness Name</InputLabel>
+                            <Select
+                                labelId="illness-label"
+                                id="illness-select"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                            >
+                                <MenuItem value="Pink Eye">Pink Eye</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <CustomTextField
