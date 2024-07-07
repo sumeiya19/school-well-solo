@@ -3,6 +3,10 @@ const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT || 5001;
 require('dotenv').config()
+const cors = require('cors');
+
+
+
 
 // Middleware Includes
 const sessionMiddleware = require('./modules/session-middleware');
@@ -20,6 +24,7 @@ const strepRouter = require('./routes/strep.router')
 const pinkEyeRouter = require('./routes/pinkeye.router')
 
 // Express Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('build'));
@@ -41,6 +46,31 @@ app.use('/api/flu', fluRouter)
 app.use('/api/stomach', stomachFluRouter)
 app.use('/api/strep', strepRouter)
 app.use('/api/pinkeye', pinkEyeRouter)
+
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+app.post('/send-email', (req, res) => {
+  const { to, subject, text, html } = req.body;
+
+  const msg = {
+      to,
+      from: 'eaglecreekmiddle@gmail.com', // Change to your verified sender
+      subject,
+      text,
+      html,
+  };
+
+  sgMail.send(msg)
+      .then(() => {
+          console.log('Email sent');
+          res.status(200).send('Email sent successfully');
+      })
+      .catch((error) => {
+          console.error('Error sending email:', error);
+          res.status(500).send('Failed to send email');
+      });
+});
 
 // Listen Server & Port
 app.listen(PORT, () => {

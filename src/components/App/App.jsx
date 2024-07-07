@@ -43,6 +43,7 @@ import FluTotal from '../FluRecords/FluTotal';
 import PinkEyeTotal from '../PinkEyeRecords/PinkEyeTotal';
 import StomachFluTotal from '../StomachFlu/StomachFluTotal';
 import StrepTotal from '../StrepRecords/StrepTotal';
+import SendEmailButton from '../ColdRecords/NotifyAdmin';
 
 import './App.css';
 
@@ -133,6 +134,7 @@ function App() {
           <ProtectedRoute exact path = "/coldrecords">
             <ColdRecords />
             <ColdTotalPopulation />
+            <SendEmailButton />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/flurecords">
