@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { TextField, Grid, Box } from '@mui/material'; // Import Material-UI components
+import { TextField, Grid, Box, Select, MenuItem, InputLabel } from '@mui/material'; // Import Material-UI components
 import { styled } from '@mui/system'; // Import styled for custom styling
 
 const CustomTextField = styled(TextField)({
@@ -93,13 +93,18 @@ function PinkEyeRecords() {
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <CustomTextField
+                        <InputLabel id="grade-label">Grade</InputLabel>
+                        <Select
                             fullWidth
-                            type="number"
-                            label="Grade"
+                            labelId="grade-label"
+                            id="grade"
                             value={grade}
                             onChange={(event) => setGrade(event.target.value)}
-                        />
+                        >
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                        </Select>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <CustomTextField

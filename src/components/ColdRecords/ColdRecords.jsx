@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Grid, Box } from '@mui/material';
+import { Select, MenuItem, InputLabel } from '@mui/material'; // Import Material-UI components
 
 const ColdRecords = () => {
     const [lastName, setLastName] = useState('');
@@ -81,14 +82,19 @@ const ColdRecords = () => {
                             onChange={(event) => setFirstName(event.target.value)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
+                    <Grid item xs={12} sm={6}>
+                        <InputLabel id="grade-label">Grade</InputLabel>
+                        <Select
                             fullWidth
-                            type="number"
-                            label="Grade"
+                            labelId="grade-label"
+                            id="grade"
                             value={grade}
                             onChange={(event) => setGrade(event.target.value)}
-                        />
+                        >
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                        </Select>
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <TextField
