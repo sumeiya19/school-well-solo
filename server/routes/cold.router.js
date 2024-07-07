@@ -35,6 +35,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
+
+
 //Post Router for new Cold Record
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('User is authenticated?:', req.isAuthenticated());

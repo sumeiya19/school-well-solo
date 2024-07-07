@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from '@mui/material';
-import { TextField, Grid, Select, MenuItem, InputLabel } from '@mui/material';
+import { TextField, Grid, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { styled } from '@mui/system';
 
 const CustomTextField = styled(TextField)({
@@ -97,14 +97,18 @@ function StrepRecords() {
                             <MenuItem value={8}>8</MenuItem>
                         </Select>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <CustomTextField
-                            fullWidth
-                            type="text"
-                            label="Illness Name"
-                            value={name}
-                            onChange={(event) => setName(event.target.value)}
-                        />
+                    <Grid item xs={12} sm={4}>
+                        <FormControl fullWidth>
+                            <InputLabel id="illness-label">Illness Name</InputLabel>
+                            <Select
+                                labelId="illness-label"
+                                id="illness-select"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                            >
+                                <MenuItem value="Strep">Strep</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <CustomTextField
