@@ -89,18 +89,7 @@ const AboutPage = () => {
                             Join SchoolWell today and take the first step towards a healthier school environment. Together, we can ensure the well-being of our students and create a safe learning space for everyone.
                         </Typography>
 
-                        <Typography variant="h4" gutterBottom>
-                            Follow Us
-                        </Typography>
-                        <Typography variant="body1" paragraph>
-                            Stay updated with our latest news and updates:
-                        </Typography>
-                        <ul>
-                            <li><a href="https://www.facebook.com">Facebook</a></li>
-                            <li><a href="https://www.twitter.com">Twitter</a></li>
-                            <li><a href="https://www.instagram.com">Instagram</a></li>
-                        </ul>
-
+          
                         <Typography variant="h4" gutterBottom>
                             Acknowledgements
                         </Typography>

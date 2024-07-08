@@ -134,6 +134,7 @@ export default function* rootSaga() {
     yield takeLatest('FETCH_PINK_EYE', fetchPinkEye)
     yield takeLatest('ADD_PINK_EYE', addPinkEye)
     yield takeLatest('DELETE_PINK_EYE', deletePinkEye)
+    yield takeLatest('DELETE_STUDENT', deleteStudent)
 }
 
 function* deleteIncidence(action) {
@@ -187,6 +188,15 @@ function* deletePinkEye(action) {
         yield put({ type: 'FETCH_PINK_EYE'});
     } catch (error) {
         console.error('Error with PINK EYE DELETE request', error);
+    }
+}
+
+function* deleteStudent(action) {
+    try {
+        yield axios.delete(`/api/student/${action.payload}`);
+        yield put({ type: 'FETCH_STUDENT'});
+    } catch (error) {
+        console.error('Error with STUDENT DELETE request', error);
     }
 }
 

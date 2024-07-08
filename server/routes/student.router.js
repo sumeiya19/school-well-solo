@@ -70,6 +70,48 @@ router.get('/total_pop', (req, res) => {
     }
 });
 
+// Update student details
+router.put('/:id', (req, res) => {
+    const studentId = req.params.id;
+    const { last_name, first_name, grade } = req.body;
+
+    const updateStudentQuery = `
+        UPDATE "student"
+        SET "last_name" = $1, "first_name" = $2, "grade" = $3
+        WHERE "id" = $4
+    `;
+
+    const values = [last_name, first_name, grade, studentId];
+
+    pool.query(updateStudentQuery, values)
+        .then((result) => {
+            console.log(`Student with ID ${studentId} updated successfully`);
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.error(`Error updating student with ID ${studentId}`, error);
+            res.sendStatus(500);
+        });
+});
+
+router.delete('/:id', (req, res) => {
+    const studentId = req.params.id;
+
+    const deleteStudentQuery = `
+        DELETE FROM "student"
+        WHERE "id" = $1
+    `;
+
+    pool.query(deleteStudentQuery, [studentId])
+        .then((result) => {
+            console.log(`Student with ID ${studentId} deleted successfully`);
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.error(`Error deleting student with ID ${studentId}`, error);
+            res.sendStatus(500);
+        });
+});
 
 
 module.exports = router;

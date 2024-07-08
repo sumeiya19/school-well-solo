@@ -37,7 +37,7 @@ const SendEmailButton = () => {
             to: 'sumeiya619@gmail.com',
             subject: 'SchoolWell Update',
             text: 'and easy to do anywhere, even with Node.js',
-            html: ' Hello School and Administration Team, We have an update regarding the Cold Incidence Records. Please log in to SchoolWell for more details. Thank you!',
+            html: ' Hello School and Administration Team, We have an update regarding Incidence Records. Please log in to SchoolWell for more details. Thank you!',
         };
 
         axios.post('http://localhost:5001/send-email', emailData)

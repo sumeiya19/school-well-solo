@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import './Home.css'; // Import your CSS file for styling
+import './Home.css'; 
 
 function HomePage() {
     const history = useHistory();
@@ -28,7 +28,7 @@ function HomePage() {
     return (
         <div className="home-container">
             <p className="welcome-message">
-                Welcome to SchoolWell! Your virtual application designed to assist school administration in managing and tracking students with contagious illnesses. Create a new record below!
+            Welcome to SchoolWell! Your digital tool designed to help school administrators manage and monitor students with contagious illnesses. Start recording incidents below!
             </p>
 
             <h3 className="section-title">Create New Incidence Records</h3>

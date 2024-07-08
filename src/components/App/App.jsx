@@ -44,8 +44,10 @@ import PinkEyeTotal from '../PinkEyeRecords/PinkEyeTotal';
 import StomachFluTotal from '../StomachFlu/StomachFluTotal';
 import StrepTotal from '../StrepRecords/StrepTotal';
 import SendEmailButton from '../ColdRecords/NotifyAdmin';
+import editStudent from '../../redux/reducers/editstudent.reducer';
 
 import './App.css';
+import EditStudent from '../InfoPage/EditStudent';
 
 
 function App() {
@@ -140,6 +142,7 @@ function App() {
           <ProtectedRoute exact path = "/flurecords">
             <FluRecords />
             <FluTotal />
+            <SendEmailButton />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/editflu">
@@ -149,6 +152,7 @@ function App() {
           <ProtectedRoute exact path = "/stomachflu">
             <StomachFlu />
             <StomachFluTotal />
+            <SendEmailButton />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/editstomachflu">
@@ -158,6 +162,7 @@ function App() {
           <ProtectedRoute exact path = "/strep">
             <StrepRecords />
             <StrepTotal />
+            <SendEmailButton />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/editstrep">
@@ -167,10 +172,15 @@ function App() {
           <ProtectedRoute exact path = "/pinkeye">
             <PinkEyeRecords />
             <PinkEyeTotal />
+            <SendEmailButton />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/editpinkeye">
             <EditPinkEye />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/editstudent">
+            <EditStudent />
           </ProtectedRoute>
 
           <Route

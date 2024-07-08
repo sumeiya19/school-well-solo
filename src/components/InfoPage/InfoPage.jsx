@@ -1,82 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Grid, TextField } from '@mui/material';
-import { styled } from '@mui/system';
-
-const CustomTextField = styled(TextField)({
-    marginBottom: '15px',
-});
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from '@mui/material';
 
 function AddNewStudent() {
-    const [lastName, setLastName] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [grade, setGrade] = useState('');
     const dispatch = useDispatch();
-
+    const history = useHistory();
     const studentList = useSelector((store) => store.studentReducer);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_STUDENT' });
     }, [dispatch]);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
+    const handleDelete = (id) => {
         dispatch({
-            type: 'ADD_STUDENT',
-            payload: {
-                last_name: lastName,
-                first_name: firstName,
-                grade,
-            }
+            type: 'DELETE_STUDENT',
+            payload: id
         });
-
-        setLastName('');
-        setFirstName('');
-        setGrade('');
     };
+
+    const handleEditClick = (student) => {
+      dispatch({ type: 'SET_EDIT_STUDENT', payload: student });
+      history.push('/editstudent');
+  };
 
     return (
         <Box p={2} maxWidth={1200} margin="auto">
-            <h1>Add New Student</h1>
-
-            <form onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={4}>
-                        <CustomTextField
-                            fullWidth
-                            type="text"
-                            label="Last Name"
-                            value={lastName}
-                            onChange={(event) => setLastName(event.target.value)}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <CustomTextField
-                            fullWidth
-                            type="text"
-                            label="First Name"
-                            value={firstName}
-                            onChange={(event) => setFirstName(event.target.value)}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <CustomTextField
-                            fullWidth
-                            type="number"
-                            label="Grade"
-                            value={grade}
-                            onChange={(event) => setGrade(event.target.value)}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button type="submit" variant="contained" color="primary">
-                            Add Student
-                        </Button>
-                    </Grid>
-                </Grid>
-            </form>
+            <h1>Student List</h1>
 
             {studentList && studentList.length > 0 ? (
                 <TableContainer component={Paper} style={{ marginTop: '20px' }}>
@@ -86,6 +36,8 @@ function AddNewStudent() {
                                 <TableCell>Last Name</TableCell>
                                 <TableCell>First Name</TableCell>
                                 <TableCell>Grade</TableCell>
+                                <TableCell>Edit</TableCell>
+                                <TableCell>Action</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -94,6 +46,12 @@ function AddNewStudent() {
                                     <TableCell>{student.last_name}</TableCell>
                                     <TableCell>{student.first_name}</TableCell>
                                     <TableCell>{student.grade}</TableCell>
+                                    <TableCell>
+                                        <Button variant="outlined" onClick={() => handleEditClick(student)}>Edit</Button>
+                                    </TableCell>  
+                                    <TableCell>
+                                        <Button onClick={() => handleDelete(student.id)} variant="outlined" color="secondary">Delete</Button>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -107,4 +65,5 @@ function AddNewStudent() {
 }
 
 export default AddNewStudent;
+
 
