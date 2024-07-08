@@ -21,7 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import HomePage from '../HomePage/HomePage';
 import AddIncidence from '../AddIncidence/AddIncidence';
-import AddNewStudent from '../AddNewStudent/AddNewStudent';
+// import AddNewStudent from '../AddNewStudent/AddNewStudent';
 import AddIncidenceForm from '../AddIncidenceForm/AddIncidenceForm';
 import Results from '../Results/Results';
 import DisplayEntries from '../DisplayEntries/DisplayEntries';
@@ -127,9 +127,9 @@ function App() {
            <IncidenceRecord />
           </ProtectedRoute>  
 
-          <ProtectedRoute exact path = "/addnewstudent">
+          {/* <ProtectedRoute exact path = "/addnewstudent">
             <AddNewStudent />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute exact path = "/coldrecords">
             <ColdRecords />

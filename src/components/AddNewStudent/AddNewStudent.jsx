@@ -1,91 +1,110 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
+// import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Grid, TextField } from '@mui/material';
+// import { styled } from '@mui/system';
 
-function AddNewStudent() {
-    const [lastName, setLastName] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [grade, setGrade] = useState('');
-    const dispatch = useDispatch();
+// const CustomTextField = styled(TextField)({
+//     marginBottom: '15px',
+// });
 
-    const studentList = useSelector((store) => store.studentReducer);
+// function AddNewStudent() {
+//     const [lastName, setLastName] = useState('');
+//     const [firstName, setFirstName] = useState('');
+//     const [grade, setGrade] = useState('');
+//     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch({ type: "FETCH_STUDENT" });
-    }, [dispatch]);
+//     const studentList = useSelector((store) => store.studentReducer);
 
-    const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
+//     useEffect(() => {
+//         dispatch({ type: 'FETCH_STUDENT' });
+//     }, [dispatch]);
 
-        // Dispatch action with payload
-        dispatch({
-            type: 'ADD_STUDENT',
-            payload: {
-                last_name: lastName,
-                first_name: firstName,
-                grade,
-            }
-        });
+//     const handleSubmit = (event) => {
+//         event.preventDefault();
 
-        // Clear input fields
-        setLastName('');
-        setFirstName('');
-        setGrade('');
-    };
+//         dispatch({
+//             type: 'ADD_STUDENT',
+//             payload: {
+//                 last_name: lastName,
+//                 first_name: firstName,
+//                 grade,
+//             }
+//         });
 
-    return (
-        <>
-            <h1>Add New Student</h1>
+//         setLastName('');
+//         setFirstName('');
+//         setGrade('');
+//     };
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    placeholder='Last Name'
-                    value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                />
+//     return (
+//         <Box p={2} maxWidth={1200} margin="auto">
+//             <h1>Add New Student</h1>
 
-                <input
-                    type='text'
-                    placeholder='First Name'
-                    value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
-                />
+//             <form onSubmit={handleSubmit}>
+//                 <Grid container spacing={2}>
+//                     <Grid item xs={12} sm={4}>
+//                         <CustomTextField
+//                             fullWidth
+//                             type="text"
+//                             label="Last Name"
+//                             value={lastName}
+//                             onChange={(event) => setLastName(event.target.value)}
+//                         />
+//                     </Grid>
+//                     <Grid item xs={12} sm={4}>
+//                         <CustomTextField
+//                             fullWidth
+//                             type="text"
+//                             label="First Name"
+//                             value={firstName}
+//                             onChange={(event) => setFirstName(event.target.value)}
+//                         />
+//                     </Grid>
+//                     <Grid item xs={12} sm={4}>
+//                         <CustomTextField
+//                             fullWidth
+//                             type="number"
+//                             label="Grade"
+//                             value={grade}
+//                             onChange={(event) => setGrade(event.target.value)}
+//                         />
+//                     </Grid>
+//                     <Grid item xs={12}>
+//                         <Button type="submit" variant="contained" color="primary">
+//                             Add Student
+//                         </Button>
+//                     </Grid>
+//                 </Grid>
+//             </form>
 
-                <input
-                    type='number'
-                    placeholder='Grade'
-                    value={grade}
-                    onChange={(e) => setGrade(e.target.value)}
-                />
-                
-                <button type='submit'>Add Student</button>
-            </form>
+//             {studentList && studentList.length > 0 ? (
+//                 <TableContainer component={Paper} style={{ marginTop: '20px' }}>
+//                     <Table>
+//                         <TableHead>
+//                             <TableRow>
+//                                 <TableCell>Last Name</TableCell>
+//                                 <TableCell>First Name</TableCell>
+//                                 <TableCell>Grade</TableCell>
+//                             </TableRow>
+//                         </TableHead>
+//                         <TableBody>
+//                             {studentList.map((student, index) => (
+//                                 <TableRow key={index}>
+//                                     <TableCell>{student.last_name}</TableCell>
+//                                     <TableCell>{student.first_name}</TableCell>
+//                                     <TableCell>{student.grade}</TableCell>
+//                                 </TableRow>
+//                             ))}
+//                         </TableBody>
+//                     </Table>
+//                 </TableContainer>
+//             ) : (
+//                 <p>No students available</p>
+//             )}
+//         </Box>
+//     );
+// }
 
-            {studentList && studentList.length > 0 ? (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Grade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {studentList.map((student, index) => (
-                            <tr key={index}>
-                                <td>{student.last_name}</td>
-                                <td>{student.first_name}</td>
-                                <td>{student.grade}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>No students available</p>
-            )}
-        </>
-    );
-}
+// export default AddNewStudent;
 
-export default AddNewStudent;
