@@ -16,6 +16,7 @@ import strepReducer from './strep.reducer';
 import editStrep from './editstrep.reducer';
 import pinkEyeReducer from './pinkeye.reducer';
 import editPinkEye from './editpinkeye.reducer';
+import editStudent from './editstudent.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   editStrep,
   pinkEyeReducer,
   editPinkEye,
+  editStudent,
 });
 
 export default rootReducer;

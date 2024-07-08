@@ -98,18 +98,18 @@ const ColdRecords = () => {
                         </Select>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <FormControl fullWidth>
-                            <InputLabel id="illness-label">Illness Name</InputLabel>
-                            <Select
-                                labelId="illness-label"
-                                id="illness-select"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                            >
-                                <MenuItem value="Cold">Cold</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
+    <FormControl fullWidth>
+        <InputLabel id="illness-label">Illness Name</InputLabel>
+        <Select
+            labelId="illness-label"
+            id="illness-select"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+        >
+            <MenuItem value="Cold">Cold</MenuItem>
+        </Select>
+    </FormControl>
+</Grid>
 
                     <Grid item xs={12} sm={4}>
                         <TextField

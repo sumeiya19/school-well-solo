@@ -23,14 +23,21 @@
 
 import React from 'react';
 import axios from 'axios';
+import { Button, Box } from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledButton = styled(Button)({
+    margin: '20px', // Adjust the margin as needed
+    float: 'right', // Align the button to the right
+});
 
 const SendEmailButton = () => {
     const handleSendEmail = () => {
         const emailData = {
             to: 'sumeiya619@gmail.com',
-            subject: 'Sending with SendGrid is Fun from acc solo w/ button',
+            subject: 'SchoolWell Update',
             text: 'and easy to do anywhere, even with Node.js',
-            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            html: ' Hello School and Administration Team, We have an update regarding Incidence Records. Please log in to SchoolWell for more details. Thank you!',
         };
 
         axios.post('http://localhost:5001/send-email', emailData)
@@ -45,10 +52,13 @@ const SendEmailButton = () => {
     };
 
     return (
-        <div>
-            <button onClick={handleSendEmail}>Send Email</button>
-        </div>
+        <Box display="flex" justifyContent="flex-end">
+            <StyledButton variant="contained" color="primary" onClick={handleSendEmail}>
+                Send Email
+            </StyledButton>
+        </Box>
     );
 };
 
 export default SendEmailButton;
+
