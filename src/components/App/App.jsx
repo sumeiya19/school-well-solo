@@ -45,6 +45,7 @@ import StomachFluTotal from '../StomachFlu/StomachFluTotal';
 import StrepTotal from '../StrepRecords/StrepTotal';
 import SendEmailButton from '../ColdRecords/NotifyAdmin';
 import editStudent from '../../redux/reducers/editstudent.reducer';
+import ProjectDetails from '../ProjectDetails/ProjectDetails';
 
 import './App.css';
 import EditStudent from '../InfoPage/EditStudent';
@@ -106,6 +107,10 @@ function App() {
 
           <ProtectedRoute exact path = "/addincidenceform">
             <AddIncidenceForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path = "/projectdetails">
+            <ProjectDetails />
           </ProtectedRoute>
 
           <ProtectedRoute exact path = "/edit">
