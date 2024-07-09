@@ -72,9 +72,8 @@ const AboutPage = () => {
                             <strong>3. View and Manage Data:</strong> Administrators can view detailed reports and manage health records from a centralized dashboard.
                         </Typography>
                         <Typography variant="body1" paragraph>
-                            <strong>4. Take Action:</strong> Based on the data and notifications, appropriate actions can be taken to address and manage health concerns within the school.
+                            <strong>4. Understand Stats:</strong> Based on the data, the incidence rates are calculated, which is an epidemiology calculation to describe the occurrence of new cases of a particular disease or condition in a specific population. The incidence rate is often described in terms of a standard population size, such as "per 1000" or "per 100,000," to facilitate comparison and understanding. 
                         </Typography>
-
                         <Typography variant="h4" gutterBottom>
                             Contact Us
                         </Typography>
